@@ -181,8 +181,6 @@ public class VirtualServiceClassScopeRule implements TestRule {
 
 	@Override
 	public Statement apply(Statement statement, Description description) {
-		System.out.println("apply: " + description.getTestClass());
-
 		return new VirtualServiceClassStatement(statement, description.getTestClass());
 	}
 
