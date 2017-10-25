@@ -63,7 +63,7 @@ public class PackVirtualService {
 				byte[] data = IOUtils.toByteArray(new FileInputStream(vrsFile));
 				out.write(data, 0, data.length);
 				out.closeEntry();
-				vrsFile.delete();
+				vrsFile.deleteOnExit();
 			}
 			if (!StringUtils.isEmpty(servicePropertiesContent)) {
 				File servicePropertiesFile = File.createTempFile("serviceProperties", ".xml");
@@ -74,7 +74,7 @@ public class PackVirtualService {
 				byte[] data = IOUtils.toByteArray(new FileInputStream(servicePropertiesFile));
 				out.write(data, 0, data.length);
 				out.closeEntry();
-				servicePropertiesFile.delete();
+				servicePropertiesFile.deleteOnExit();
 			}
 		} finally {
 			if (null != out)
