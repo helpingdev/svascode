@@ -11,6 +11,7 @@ This API will cover same scope as WirMock or MokServer</description>
 	<properties>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
+		<javadoc.opts>-Xdoclint:none</javadoc.opts>
 	</properties>
 	<distributionManagement>
 		<repository>
@@ -90,6 +91,29 @@ This API will cover same scope as WirMock or MokServer</description>
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.2</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<nohelp>true</nohelp>
+							<notree>true</notree>
+							<additionalparam>${javadoc.opts}</additionalparam>
+							<excludePackageNames>com.ca.devtest.sv.devtools.annotation.processors</excludePackageNames>
+							<subpackages>com.ca.devtest.sv.devtools.annotation</subpackages>
+							<sourcepath>${project.basedir}/src/main/java</sourcepath>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 	</build>
 </project>

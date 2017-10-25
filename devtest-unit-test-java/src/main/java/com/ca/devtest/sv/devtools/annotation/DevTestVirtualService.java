@@ -10,7 +10,23 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author gaspa03
+ * Define virtual service. <br/>
+ * 
+ * Attributes are :
+ * <ul>
+ * <li>serviceName : virtual service name</li>
+ * <li>port : listening port (default is '-1')</li>
+ * <li>workingFolder : folder of request/response files</li>
+ * <li>basePath : virtual service base path ('/' by default)</li>
+ * <li>transport : 'HTTP' by default</li>
+ * <li>requestDataProtocol : array with request data protocols (empty by
+ * default)</li>
+ * <li>responseDataProtocol : array with response data protocols (empty by
+ * default)</li>
+ * <li>parameters : (empty by default)</li>
+ * </ul>
+ * 
+ * @author gaspa03, bboulch
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -23,7 +39,7 @@ public @interface DevTestVirtualService {
 	VirtualServiceType type() default VirtualServiceType.RRPAIRS;
 	Protocol transport() default @Protocol(ProtocolType.TPH_HTTP );
 	Protocol[] requestDataProtocol() default{ } ;
-	Protocol[] responseDataProtocol()default{ } ;
+	Protocol[] responseDataProtocol() default{ } ;
 	Class preDeployClass() default Object.class;
 	String workingFolder();
 	Parameter[] parameters() default{};

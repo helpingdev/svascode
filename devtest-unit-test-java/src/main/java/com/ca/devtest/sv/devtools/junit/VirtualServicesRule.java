@@ -3,7 +3,6 @@
  */
 package com.ca.devtest.sv.devtools.junit;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +19,11 @@ import com.ca.devtest.sv.devtools.annotation.processor.DevTestVirtualServerAnnot
 import com.ca.devtest.sv.devtools.services.VirtualService;
 
 /**
- * @author gaspa03
+ * Extend JUnit behaviour for using virtual services. <br/>
+ *  
+ * Allow virtual services to be deployed before test methods and undeployed after. 
+ * 
+ * @author gaspa03, bboulch
  *
  */
 public class VirtualServicesRule implements TestRule {

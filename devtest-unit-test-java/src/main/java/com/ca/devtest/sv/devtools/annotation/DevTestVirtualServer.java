@@ -9,7 +9,21 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author gaspa03
+ * Specify DevTest registry to be used for deployement, with differents
+ * parameters. <br/>
+ * 
+ * Attributes are :
+ * <ul>
+ * <li>registryHost : registry host (default is "localhost")</li>
+ * <li>deployServiceToVse : VSE name (default is "VSE")</li>
+ * <li>login : login used to connect to registry (default is "svpower")</li>
+ * <li>password : password used to connect to registry (default is
+ * "svpower")</li>
+ * <li>groupName : group name used to prefix virtual services</li>
+ * <li>protocol : protocol used to access API</li>
+ * </ul>
+ * 
+ * @author gaspa03, bboulch
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -17,28 +31,45 @@ import java.lang.annotation.Target;
 public @interface DevTestVirtualServer {
 
 	/**
-	 * @return registry serveur name by default localhost
+	 * Registry server name. By default 'localhost'.
+	 * 
+	 * @return registry server name.
 	 */
 	String registryHost() default "localhost";
-	
+
 	/**
+	 * VSE name. By default 'VSE'.
+	 * 
+	 * @return VSE name
+	 */
+	String deployServiceToVse() default "VSE";
+
+	/**
+	 * Devtest user. By default 'svpower'
+	 * 
+	 * @return devtest user
+	 */
+	String login() default "svpower";
+
+	/**
+	 * Devtest password. By default 'svpower'
+	 * 
+	 * @return devtest password
+	 */
+	String password() default "svpower";
+
+	/**
+	 * Group name used to prefix virtual services. Empty by default.
+	 * 
+	 * @return group name used to prefix virtual services
+	 */
+	String groupName() default "";
+
+	/**
+	 * Protocol to access API. By default 'http'
+	 * 
 	 * @return protocol to access api
 	 */
 	String protocol() default "http";
-	/**
-	 * @return vse name by default VSE
-	 */
-	String deployServiceToVse() default "VSE";
-	
-	/**
-	 * @return devtest user by default svpower
-	 */
-	String login() default "svpower";
-	/**
-	 * @return devtest passord by default svpower
-	 */
-	String password() default "svpower";
-	String groupName() default "";
 
 }
-

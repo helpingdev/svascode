@@ -10,8 +10,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author gaspa03
- * Define Virtual service using VRS fragment file
+ * Define virtual service using VRS fragment file. <br/>
+ * 
+ * Attributes are :
+ * <ul>
+ * <li>serviceName : virtual service name</li>
+ * <li>workingFolder : folder of request/response files</li>
+ * <li>vrsConfig : VRS file name</li>
+ * </ul>
+ * 
+ * @author gaspa03, bboulch
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE,ElementType.METHOD})
