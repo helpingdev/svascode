@@ -80,8 +80,8 @@ public class VirtualServicesRule implements TestRule {
 					LOGGER.debug("Deploy virtual service " + virtualService.getName() + ".....");
 					virtualService.deploy();
 					LOGGER.debug("Virtual service " + virtualService.getName() + " deployed!");
-				} catch (IOException e) {
-					throw new RuntimeException("Error when try to deploy Virtual Service  " + virtualService.getName());
+				} catch (Exception error) {
+				   throw new RuntimeException("Error when try to deploy Virtual Service  " + virtualService.getName(), error);
 				}
 			}
 		}
@@ -104,7 +104,7 @@ public class VirtualServicesRule implements TestRule {
 				} catch (Exception error) {
 
 					throw new RuntimeException(
-							"Error when try to unDeploy Virtual Service  " + virtualService.getName());
+							"Error when try to unDeploy Virtual Service  " + virtualService.getName(), error);
 
 				}
 			}

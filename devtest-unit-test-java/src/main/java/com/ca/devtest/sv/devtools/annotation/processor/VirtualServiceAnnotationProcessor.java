@@ -64,7 +64,7 @@ public class VirtualServiceAnnotationProcessor implements AnnotationProcessor {
 
 			return virtualServiceBuilder.build();
 		} catch (Exception error) {
-			throw new VirtualServiceProcessorException("Error during building virtual service", error);
+			throw new VirtualServiceProcessorException("Error during building virtual service : ", error);
 		}
 
 	}

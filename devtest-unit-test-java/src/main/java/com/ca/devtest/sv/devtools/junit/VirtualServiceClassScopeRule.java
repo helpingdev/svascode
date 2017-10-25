@@ -111,7 +111,7 @@ public class VirtualServiceClassScopeRule implements TestRule {
 				} catch (Exception error) {
 
 					throw new RuntimeException(
-							"Error when try to unDeploy Virtual Service  " + virtualService.getDeployedName());
+							"Error when try to unDeploy Virtual Service  " + virtualService.getDeployedName(), error);
 
 				}
 			}
@@ -131,9 +131,9 @@ public class VirtualServiceClassScopeRule implements TestRule {
 					LOGGER.debug("Deploy virtual service " + virtualService.getDeployedName() + ".....");
 					virtualService.deploy();
 					LOGGER.debug("Virtual service " + virtualService.getDeployedName() + " deployed!");
-				} catch (IOException e) {
+				} catch (Exception error) {
 					throw new RuntimeException(
-							"Error when try to deploy Virtual Service  " + virtualService.getDeployedName());
+							"Error when try to deploy Virtual Service  " + virtualService.getDeployedName(), error);
 				}
 			}
 		}
