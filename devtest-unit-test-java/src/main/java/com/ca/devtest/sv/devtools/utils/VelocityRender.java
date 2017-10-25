@@ -29,6 +29,7 @@ public class VelocityRender {
 		VelocityEngine engine = new VelocityEngine();
 
 		engine.setProperty(Velocity.RESOURCE_LOADER, "string");
+      engine.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.NullLogChute");
 		
 		engine.addProperty("string.resource.loader.repository.static", "false");
 		engine.init();
