@@ -13,6 +13,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Config {
 
-	String value();
+	String value() default "";
 	Parameter[] parameters() default{};
 }

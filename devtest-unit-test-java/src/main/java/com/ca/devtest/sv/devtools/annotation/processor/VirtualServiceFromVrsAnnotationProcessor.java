@@ -4,10 +4,15 @@
 package com.ca.devtest.sv.devtools.annotation.processor;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.ca.devtest.sv.devtools.DevTestClient;
 import com.ca.devtest.sv.devtools.annotation.DevTestVirtualServiceFromVrs;
@@ -49,7 +54,28 @@ public class VirtualServiceFromVrsAnnotationProcessor implements AnnotationProce
 			File workingFolder = new File(url.toURI());
 			
 			VirtualServiceBuilder virtualServiceBuilder = devTestClient.fromRRPairs(virtualService.serviceName(),workingFolder);
-			File vrsFile= new File(workingFolder,virtualService.vrsConfig().value());
+			// Début de rajout
+			File vrsFile = null;
+			if (!StringUtils.isEmpty(virtualService.vrsConfig().value())) {
+				// if vrsConfig.value is specified, vrs file is loaded from this value
+				vrsFile = new File(workingFolder, virtualService.vrsConfig().value());
+			} else {
+				// else we try to load a template in class path
+				File tmpVrs = File.createTempFile(virtualService.serviceName(), "vrs");
+				tmpVrs.deleteOnExit();
+				InputStream inputStream = getClass().getClassLoader().getResourceAsStream("template.vrs");
+				FileOutputStream fileOutputStream = new FileOutputStream(tmpVrs);
+				try {
+					IOUtils.copy(inputStream, fileOutputStream);
+				} catch (Exception error) {
+					throw new VirtualServiceProcessorException(
+							"Error while reading template.vrs file from classpath (maybe not found ?) : ", error);
+				}
+				inputStream.close();
+				fileOutputStream.close();
+				vrsFile = tmpVrs;
+			}
+			// Fin de rajout
 			// build Transport Protocol
 			TransportProtocolFromVrsBuilder transportBuilder = new TransportProtocolFromVrsBuilder(vrsFile);
 				Parameter[] transportParam = virtualService.vrsConfig().parameters();
