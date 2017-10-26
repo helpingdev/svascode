@@ -9,16 +9,11 @@
 	<description>API to use SV as API with Junit
 This API will cover same scope as WirMock or MokServer</description>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<javadoc.opts>-Xdoclint:none</javadoc.opts>
 	</properties>
-	<distributionManagement>
-		<repository>
-			<id>local</id>
-			<url>file:///Users/gaspa03/git/devtest-mvn-repo</url>
-		</repository>
-	</distributionManagement>
 	<dependencies>
 		
 		<dependency>
@@ -105,6 +100,7 @@ This API will cover same scope as WirMock or MokServer</description>
 						<configuration>
 							<nohelp>true</nohelp>
 							<notree>true</notree>
+							<quiet>true</quiet>
 							<additionalparam>${javadoc.opts}</additionalparam>
 							<excludePackageNames>com.ca.devtest.sv.devtools.annotation.processors</excludePackageNames>
 							<subpackages>com.ca.devtest.sv.devtools.annotation</subpackages>
