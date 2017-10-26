@@ -54,7 +54,7 @@ public class VirtualServiceFromVrsAnnotationProcessor implements AnnotationProce
 			File workingFolder = new File(url.toURI());
 			
 			VirtualServiceBuilder virtualServiceBuilder = devTestClient.fromRRPairs(virtualService.serviceName(),workingFolder);
-			// Début de rajout
+			// DÃ©but de rajout
 			File vrsFile = null;
 			if (!StringUtils.isEmpty(virtualService.vrsConfig().value())) {
 				// if vrsConfig.value is specified, vrs file is loaded from this value
