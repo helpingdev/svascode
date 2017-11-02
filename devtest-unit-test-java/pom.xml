@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ca.devtest.sv.devtools</groupId>
 	<artifactId>devtest-unit-test-java</artifactId>
-	<version>1.1.7</version>
+	<version>1.1.9-SNAPSHOT</version>
 	<name>devtest-unit-test-java</name>
 
 	<description>API to use SV as API with Junit
@@ -14,8 +14,10 @@ This API will cover same scope as WirMock or MokServer</description>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<javadoc.opts>-Xdoclint:none</javadoc.opts>
 	</properties>
+
+	
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -86,7 +88,7 @@ This API will cover same scope as WirMock or MokServer</description>
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -109,7 +111,7 @@ This API will cover same scope as WirMock or MokServer</description>
 					</execution>
 				</executions>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 </project>
