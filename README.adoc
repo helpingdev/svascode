@@ -19,13 +19,13 @@ This annotations will use ***CA DevTest Rest API (CA DevTest Invoke 2)*** and it
 In  the **pom file** of your maven project  add a new repository to get the libraries dependencies.
 [source,xml]
 ----
-<repositories>
-	<repository>
-		<id>git-devtest</id>
-		<name> CA SV as Code's Git based repo </name>
-		<url>https://github.com/pgasp/devtest-mvn-repo/raw/master/</url>
-	</repository>
-</repositories>	
+	<repositories>
+		<repository>
+			<id>git-devtest</id>
+			<name>DevTest's Git based repo</name>
+			<url>https://raw.github.com/pgasp/devtest-mvn-repo/master/</url>
+		</repository>
+	</repositories>
 ----
 
 Add below dependency with scope test in your **pom file** : 
