@@ -70,7 +70,7 @@ public class UserServiceIntegrationTest {
 		// Then
 		printUsers(users);
 		assertNotNull(users);
-		assertEquals(0, users.length);
+		assertEquals(1, users.length);
 
 
 	}
