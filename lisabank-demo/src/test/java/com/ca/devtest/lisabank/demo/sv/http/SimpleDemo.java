@@ -8,6 +8,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.ca.devtest.sv.devtools.annotation.DevTestVirtualServer;
 import com.ca.devtest.sv.devtools.annotation.DevTestVirtualService;
 import com.ca.devtest.sv.devtools.annotation.Protocol;
 import com.ca.devtest.sv.devtools.annotation.ProtocolType;
+import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
 
 /**
  * @author pascal.gasp@ca.com
@@ -33,11 +35,13 @@ public class SimpleDemo {
 	static final Log logger = LogFactory.getLog(SimpleDemo.class);
 	@Autowired
 	private BankService bankServices;
+	@Rule
+	public VirtualServicesRule rules = new VirtualServicesRule();
 
-	@DevTestVirtualService(serviceName = "UserServiceTest-EJB3UserControlBean", 
-			port = 9081, basePath = "/itkoExamples/EJB3UserControlBean",
-			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean",
-			requestDataProtocol = {@Protocol(ProtocolType.DPH_SOAP) })
+	@DevTestVirtualService(serviceName = "getListUser", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
+			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean", 
+			requestDataProtocol = {
+			@Protocol(ProtocolType.DPH_SOAP) })
 	@Test
 	public void getListUser() {
 		User[] users = bankServices.getListUser();
@@ -45,17 +49,17 @@ public class SimpleDemo {
 		assertEquals(9, users.length);
 	}
 
-	@DevTestVirtualService(serviceName = "UserServiceTest-EJB3UserControlBean", 
-			port = 9081, basePath = "/itkoExamples/EJB3UserControlBean",
-			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean0",
-			requestDataProtocol = {@Protocol(ProtocolType.DPH_SOAP) })
+	@DevTestVirtualService(serviceName = "getListUser", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
+			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean0", 
+			requestDataProtocol = {
+			@Protocol(ProtocolType.DPH_SOAP) })
 	@Test
-	public void getListUser0() {
+	public void getListUser1() {
 		User[] users = bankServices.getListUser();
-		assertNotNull(users);
-		assertEquals(0, users.length);
+		
+		assertEquals(1, users.length);
 	}
-
+	
 	private void printUsers(User[] users) {
 		for (User user : users) {
 			logger.info(user.getFname() + " " + user.getLname() + " " + user.getLogin());

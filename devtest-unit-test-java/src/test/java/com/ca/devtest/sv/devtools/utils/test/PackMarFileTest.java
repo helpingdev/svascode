@@ -1,4 +1,4 @@
-package com.ca.devtest.sv.devtools.utils;
+package com.ca.devtest.sv.devtools.utils.test;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
+
+import com.ca.devtest.sv.devtools.utils.PackMarFile;
 
 public class PackMarFileTest {
 

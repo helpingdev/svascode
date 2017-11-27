@@ -38,7 +38,6 @@ public class UserServiceIntegrationTest {
 			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean",
 			requestDataProtocol = {@Protocol(ProtocolType.DPH_SOAP) })
 
-
 	@Test
 	public void getListUser() {
 		// Given
@@ -54,6 +53,25 @@ public class UserServiceIntegrationTest {
 		assertNotNull(user);
 
 		assertEquals("Admin", user.getLname());
+
+	}
+
+	@DevTestVirtualService(serviceName = "UserServiceTest-EJB3UserControlBean", 
+			port = 9081, basePath = "/itkoExamples/EJB3UserControlBean",
+			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean0",
+			requestDataProtocol = {@Protocol(ProtocolType.DPH_SOAP) })
+
+	@Test
+	public void getListUser0() {
+		// Given
+
+		// When
+		User[] users = bankServices.getListUser();
+		// Then
+		printUsers(users);
+		assertNotNull(users);
+		assertEquals(0, users.length);
+
 
 	}
 

@@ -1,0 +1,5 @@
+
+registryHost=localhost
+deployServiceToVse=VSE
+login=svpowe
+password=svpower

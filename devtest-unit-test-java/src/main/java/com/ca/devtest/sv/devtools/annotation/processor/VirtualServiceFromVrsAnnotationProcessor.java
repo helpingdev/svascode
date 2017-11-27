@@ -54,12 +54,14 @@ public class VirtualServiceFromVrsAnnotationProcessor implements AnnotationProce
 			File workingFolder = new File(url.toURI());
 			
 			VirtualServiceBuilder virtualServiceBuilder = devTestClient.fromRRPairs(virtualService.serviceName(),workingFolder);
-			// Début de rajout
+			
 			File vrsFile = null;
 			if (!StringUtils.isEmpty(virtualService.vrsConfig().value())) {
+				
 				// if vrsConfig.value is specified, vrs file is loaded from this value
 				vrsFile = new File(workingFolder, virtualService.vrsConfig().value());
 			} else {
+				
 				// else we try to load a template in class path
 				File tmpVrs = File.createTempFile(virtualService.serviceName(), "vrs");
 				tmpVrs.deleteOnExit();
@@ -76,6 +78,10 @@ public class VirtualServiceFromVrsAnnotationProcessor implements AnnotationProce
 				vrsFile = tmpVrs;
 			}
 			// Fin de rajout
+			
+			// handle Parameters and propagate parameters to Virtualservicebuilder
+			Utility.addParamsToBuilder(virtualServiceBuilder, virtualService.parameters());
+			
 			// build Transport Protocol
 			TransportProtocolFromVrsBuilder transportBuilder = new TransportProtocolFromVrsBuilder(vrsFile);
 				Parameter[] transportParam = virtualService.vrsConfig().parameters();

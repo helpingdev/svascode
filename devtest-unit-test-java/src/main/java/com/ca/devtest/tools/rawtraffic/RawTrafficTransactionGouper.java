@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ca.devtest.tools.rawtraffic;
 
 import java.io.File;

@@ -15,7 +15,7 @@ This API will cover same scope as WirMock or MokServer</description>
 		<javadoc.opts>-Xdoclint:none</javadoc.opts>
 	</properties>
 
-	
+
 	<dependencies>
 
 		<dependency>
@@ -53,7 +53,11 @@ This API will cover same scope as WirMock or MokServer</description>
 			<artifactId>velocity</artifactId>
 			<version>1.7</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.aeonbits.owner</groupId>
+			<artifactId>owner</artifactId>
+			<version>1.0.9</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

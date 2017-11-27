@@ -43,7 +43,7 @@ public class AccountServiceTest {
 			workingFolder = "AccountServiceTest/createUserWithCheckingAccount/EJB3AccountControlBean", 
 			requestDataProtocol = {
 			@Protocol(ProtocolType.DPH_SOAP) })
-	
+		
 	@DevTestVirtualService(serviceName = "UserServiceTest-EJB3UserControlBean", 
 	port = 9081, basePath = "/itkoExamples/EJB3UserControlBean", 
 	workingFolder = "AccountServiceTest/createUserWithCheckingAccount/EJB3UserControlBean", 

@@ -17,6 +17,7 @@ import java.lang.annotation.Target;
  * <li>serviceName : virtual service name</li>
  * <li>workingFolder : folder of request/response files</li>
  * <li>vrsConfig : VRS file name</li>
+ * <li>parameters : (empty by default) it's keys values array that used as parameters in rrpairs files</li>
  * </ul>
  * 
  * @author gaspa03, bboulch
@@ -28,7 +29,7 @@ public @interface DevTestVirtualServiceFromVrs {
 	String serviceName();
 	String workingFolder();
 	Config vrsConfig();
-	
+	Parameter[] parameters() default{};
 	
 }
 
