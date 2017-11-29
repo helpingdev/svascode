@@ -1,5 +1,5 @@
 
-package com.ca.devtest.sv.devtools;
+package com.ca.devtest.lisabank.demo.sv.vsm;
 
 import static org.junit.Assert.fail;
 
@@ -17,32 +17,23 @@ import com.ca.devtest.sv.devtools.junit.VirtualServiceClassScopeRule;
 import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
 
 @DevTestVirtualServer(deployServiceToVse = "VSE",groupName="Test")
-@DevTestVirtualService(serviceName = "Proxy", type = VirtualServiceType.VSM, workingFolder = "mar/vsm/proto" )
-public class GlobalVirtualServiceTest {
+
+public class ExistingVirtualServiceTest {
 
 	// handle VS with Class scope
-	@ClassRule
-	public static VirtualServiceClassScopeRule clazzRule = new VirtualServiceClassScopeRule();
+//	@ClassRule
+//	public static VirtualServiceClassScopeRule clazzRule = new VirtualServiceClassScopeRule();
 	//
 	@Rule
 	public VirtualServicesRule rules = new VirtualServicesRule();
 	
 	
 	
-	@DevTestVirtualServiceFromVrs(serviceName = "demo", workingFolder = "rrpairs/soapWithVrs", 
-			vrsConfig = @Config(value = "transport.vrs",
-			parameters = { @Parameter(name = "port", value = "9002"), @Parameter(name = "basePath", value = "/lisa") }))
-	
-
+	@DevTestVirtualService(serviceName = "Proxy", type = VirtualServiceType.VSM, workingFolder = "vsm/lisabank" )
 	@Test
 	public void test1() {
 		System.out.println("Not yet implemented");
 	}
 
-	@DevTestVirtualServiceFromVrs(serviceName = "demo", workingFolder = "rrpairs/soapWithVrs", vrsConfig = @Config(value = "transport.vrs", parameters = {
-			@Parameter(name = "port", value = "9002"), @Parameter(name = "basePath", value = "/lisa") }))
-	@Test
-	public void test2() {
-		fail("Not yet implemented");
-	}
+	
 }

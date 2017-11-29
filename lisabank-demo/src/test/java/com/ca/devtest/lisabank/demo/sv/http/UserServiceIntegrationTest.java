@@ -56,24 +56,7 @@ public class UserServiceIntegrationTest {
 
 	}
 
-	@DevTestVirtualService(serviceName = "UserServiceTest-EJB3UserControlBean", 
-			port = 9081, basePath = "/itkoExamples/EJB3UserControlBean",
-			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean0",
-			requestDataProtocol = {@Protocol(ProtocolType.DPH_SOAP) })
-
-	@Test
-	public void getListUser0() {
-		// Given
-
-		// When
-		User[] users = bankServices.getListUser();
-		// Then
-		printUsers(users);
-		assertNotNull(users);
-		assertEquals(1, users.length);
-
-
-	}
+	
 
 	/**
 	 * @param users

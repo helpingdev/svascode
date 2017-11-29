@@ -33,13 +33,13 @@ public class DevTestClient {
 
 	/**
 	 * @param registryHostName
-	 * @param name
+	 * @param vseName
 	 * @param userName
 	 * @param password
 	 * @param group
 	 */
-	public DevTestClient(String registryHostName, String name, String userName, String password, String group) {
-		this.vse = new VirtualServiceEnvironment(registryHostName, name,userName,password, group);
+	public DevTestClient(String registryHostName, String vseNname, String userName, String password, String group) {
+		this.vse = new VirtualServiceEnvironment(registryHostName, vseNname,userName,password, group);
 		this.virtualServices = new HashMap<String, VirtualService>();
 	}
 

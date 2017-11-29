@@ -1,0 +1,3 @@
+@DevTestVirtualService(serviceName = "getListUser", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
+			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean", 
+			requestDataProtocol = {@Protocol(ProtocolType.DPH_SOAP) })
