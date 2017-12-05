@@ -50,16 +50,7 @@ public class SimpleDemo {
 	}
 
 
-	@DevTestVirtualService(serviceName = "getListUser0", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
-			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean0", 
-			requestDataProtocol = {@Protocol(ProtocolType.DPH_SOAP) })
-	@Test
-	public void getListUser0() {
-		User[] users = bankServices.getListUser();
-		assertNotNull(users);
-		printUsers(users);
-		assertEquals(0, users.length);
-	}
+	
 	
 	private void printUsers(User[] users) {
 		for (User user : users) {
