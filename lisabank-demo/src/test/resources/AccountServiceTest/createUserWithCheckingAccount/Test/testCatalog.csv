@@ -1,9 +1,0 @@
-ServiceName;EndPoint;TargetServer;TargetPort;LisaPort;RRPairsFolder;RequestFile;ResponseFile
-EJB3UserControlBean;/itkoExamples/EJB3UserControlBean;localhost;9080;50000;Test;/itkoExamples/EJB3UserControlBean/recording-1-req.xml;/itkoExamples/EJB3UserControlBean/recording-1-rsp.xml
-EJB3UserControlBean;/itkoExamples/EJB3UserControlBean;localhost;9080;50000;Test;/itkoExamples/EJB3UserControlBean/recording-2-req.xml;/itkoExamples/EJB3UserControlBean/recording-2-rsp.xml
-EJB3UserControlBean;/itkoExamples/EJB3UserControlBean;localhost;9080;50000;Test;/itkoExamples/EJB3UserControlBean/recording-3-req.xml;/itkoExamples/EJB3UserControlBean/recording-3-rsp.xml
-EJB3UserControlBean;/itkoExamples/EJB3UserControlBean;localhost;9080;50000;Test;/itkoExamples/EJB3UserControlBean/recording-4-req.xml;/itkoExamples/EJB3UserControlBean/recording-4-rsp.xml
-TokenBean;/itkoExamples/TokenBean;localhost;9080;50000;Test;/itkoExamples/TokenBean/recording-5-req.xml;/itkoExamples/TokenBean/recording-5-rsp.xml
-EJB3AccountControlBean;/itkoExamples/EJB3AccountControlBean;localhost;9080;50000;Test;/itkoExamples/EJB3AccountControlBean/recording-6-req.xml;/itkoExamples/EJB3AccountControlBean/recording-6-rsp.xml
-EJB3AccountControlBean;/itkoExamples/EJB3AccountControlBean;localhost;9080;50000;Test;/itkoExamples/EJB3AccountControlBean/recording-7-req.xml;/itkoExamples/EJB3AccountControlBean/recording-7-rsp.xml
-EJB3UserControlBean;/itkoExamples/EJB3UserControlBean;localhost;9080;50000;Test;/itkoExamples/EJB3UserControlBean/recording-8-req.xml;/itkoExamples/EJB3UserControlBean/recording-8-rsp.xml

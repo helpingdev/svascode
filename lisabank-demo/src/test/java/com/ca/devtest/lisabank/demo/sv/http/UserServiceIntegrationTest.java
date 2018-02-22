@@ -36,7 +36,6 @@ public class UserServiceIntegrationTest {
 			port = 9081, basePath = "/itkoExamples/EJB3UserControlBean",
 			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean",
 			requestDataProtocol = {@Protocol(ProtocolType.DPH_SOAP) })
-
 	
 	@Test
 	public void getListUser() {
