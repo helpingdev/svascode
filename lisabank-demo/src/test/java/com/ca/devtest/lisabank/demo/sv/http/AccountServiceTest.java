@@ -32,8 +32,6 @@ import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
 @SpringBootTest(classes = LisaBankClientApplication.class)
 @DevTestVirtualServer(registryHost = "localhost", deployServiceToVse = "VSE")
 
-
-
 public class AccountServiceTest {
 	@Autowired
 	private BankService bankServices;

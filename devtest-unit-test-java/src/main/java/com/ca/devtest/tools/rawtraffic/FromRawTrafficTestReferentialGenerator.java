@@ -40,7 +40,7 @@ public class FromRawTrafficTestReferentialGenerator {
 	private static final String TEMPLATE_TEST_CATALOG = "%s;%s;%s;%s;50000;%s;%s;%s";
 	private static final boolean GENERATE_META = false;
 
-	private static final String ROOTFOLDER = "Test";
+	private static final String ROOTFOLDER = "rrpairs";
 
 	private static final XPath XPATH = XPathFactory.newInstance().newXPath();
 	private static final List<String> listofMetaToRejet = new ArrayList<String>();
