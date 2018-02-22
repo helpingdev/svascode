@@ -24,6 +24,7 @@ public class DevTestVirtualServerAnnotationProcessor {
 
 	private final DevTestClient devtestClient;
 	private static final Log LOGGER = LogFactory.getLog(DevTestVirtualServerAnnotationProcessor.class);
+	
 
 	/**
 	 * @param ownerClazz
@@ -40,34 +41,37 @@ public class DevTestVirtualServerAnnotationProcessor {
 	 */
 	private DevTestClient buildDevtestClient(Class<?> clazz) {
 		DevTestVirtualServer virtualServer = clazz.getAnnotation(DevTestVirtualServer.class);
+
 		return new DevTestClient(virtualServer.registryHost(), virtualServer.deployServiceToVse(),
 				virtualServer.login(), virtualServer.password(), virtualServer.groupName());
 
 	}
-	public  List<VirtualService> process(Class<?> clazz) throws VirtualServiceProcessorException {
+
+	public List<VirtualService> process(Class<?> clazz) throws VirtualServiceProcessorException {
 
 		Annotation[] annotations = clazz.getDeclaredAnnotations();
 		List<VirtualService> virtualServices = new ArrayList<VirtualService>();
 		for (Annotation annotation : annotations) {
-			// get Annotation processor 
+			// get Annotation processor
 			AnnotationProcessor processor = AnnotationProcessorFactory.getInstance().getProcessor(annotation);
-			List<VirtualService> services=processor.process(devtestClient,annotation);
-			if( null!=services)
-			virtualServices.addAll(services);
+			List<VirtualService> services = processor.process(devtestClient, annotation);
+			if (null != services)
+				virtualServices.addAll(services);
 		}
 
 		return virtualServices;
 	}
-	public  List<VirtualService> process(Method method) throws VirtualServiceProcessorException {
+
+	public List<VirtualService> process(Method method) throws VirtualServiceProcessorException {
 
 		Annotation[] annotations = method.getDeclaredAnnotations();
 		List<VirtualService> virtualServices = new ArrayList<VirtualService>();
 		for (Annotation annotation : annotations) {
-			// get Annotation processor 
+			// get Annotation processor
 			AnnotationProcessor processor = AnnotationProcessorFactory.getInstance().getProcessor(annotation);
-			List<VirtualService> services=processor.process(devtestClient,annotation);
-			if( null!=services)
-			virtualServices.addAll(services);
+			List<VirtualService> services = processor.process(devtestClient, annotation);
+			if (null != services)
+				virtualServices.addAll(services);
 		}
 
 		return virtualServices;

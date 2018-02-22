@@ -1,0 +1,9 @@
+POST /itkoExamples/EJB3AccountControlBean HTTP/1.1
+ Content-Type: text/xml; charset=UTF-8
+SOAPAction: ""
+Token: -121238a4:1596fc5557e:-7fea
+User-Agent: Apache CXF 3.1.6
+Pragma: no-cache
+Content-Length: 220
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:getAccount xmlns:ns2="http://ejb3.examples.itko.com/"><accountId>206403687921</accountId></ns2:getAccount></soap:Body></soap:Envelope>

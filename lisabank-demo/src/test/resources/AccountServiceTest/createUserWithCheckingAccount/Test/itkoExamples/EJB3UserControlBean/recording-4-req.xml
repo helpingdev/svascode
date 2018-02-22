@@ -1,0 +1,8 @@
+POST /itkoExamples/EJB3UserControlBean HTTP/1.1
+ Content-Type: text/xml; charset=UTF-8
+SOAPAction: ""
+User-Agent: Apache CXF 3.1.6
+Pragma: no-cache
+Content-Length: 235
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:addUser xmlns:ns2="http://ejb3.examples.itko.com/"><username>pascal</username><password>password</password></ns2:addUser></soap:Body></soap:Envelope>

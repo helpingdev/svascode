@@ -3,6 +3,8 @@ package com.bnpparibas.expe.svasacode;
 import java.io.File;
 import java.io.IOException;
 
+import org.junit.Test;
+
 import com.ca.devtest.sv.devtools.DevTestClient;
 import com.ca.devtest.sv.devtools.protocol.builder.TransportProtocolFromVrsBuilder;
 import com.ca.devtest.sv.devtools.services.VirtualService;
@@ -18,12 +20,12 @@ import com.ca.devtest.sv.devtools.services.builder.VirtualServiceBuilder;
  */
 public class SvAsCodeAPI {
 	
-	
+	@Test
 	public void testAPI() throws IOException{
 		
 		
 		
-		File rrpairsFolder=new File("");
+		File rrpairsFolder=new File("/Users/gaspa03/git/svascode/devtest-unit-test-java/src/test/resources/rrpairs/search_client");
 		File vrsFile=new File(rrpairsFolder,"vrs_template.xml");
 		
 		// Create 
@@ -32,7 +34,7 @@ public class SvAsCodeAPI {
 		// build Transport Protocol
 		TransportProtocolFromVrsBuilder transportBuilder = new TransportProtocolFromVrsBuilder(vrsFile);
 		//Optional:fill out parameter in your VRS file
-		transportBuilder.addParameter("port", "8080");
+		transportBuilder.addParameter("port", "8081");
 		
 		//  Virtual Service builder
 		VirtualServiceBuilder vsbuilder=devtest.fromRRPairs("myservice",rrpairsFolder);

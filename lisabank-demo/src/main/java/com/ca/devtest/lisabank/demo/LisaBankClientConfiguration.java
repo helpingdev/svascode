@@ -5,8 +5,10 @@ import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.feature.LoggingFeature;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 import com.ca.devtest.lisabank.demo.business.HttpHeaderInterceptor;
 import com.ca.devtest.lisabank.wsdl.EJB3AccountControlBean;
@@ -69,4 +71,6 @@ public class LisaBankClientConfiguration {
 	    springBus.getOutInterceptors().add(new HttpHeaderInterceptor(tokenServiceClient()));
 	    return springBus;
 	}
+	
+	
 }

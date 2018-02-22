@@ -29,20 +29,20 @@ public class GlobalVirtualServiceTest {
 	
 	
 	
-	@DevTestVirtualServiceFromVrs(serviceName = "demo", workingFolder = "rrpairs/soapWithVrs", 
+	@DevTestVirtualServiceFromVrs(serviceName = "demo", workingFolder = "rrpairs/soapWithVrs", parameters={ @Parameter(name = "ClientID", value = "9002"), }, 
 			vrsConfig = @Config(value = "transport.vrs",
 			parameters = { @Parameter(name = "port", value = "9002"), @Parameter(name = "basePath", value = "/lisa") }))
 	
 
 	@Test
 	public void test1() {
-		System.out.println("Not yet implemented");
+	
 	}
 
 	@DevTestVirtualServiceFromVrs(serviceName = "demo", workingFolder = "rrpairs/soapWithVrs", vrsConfig = @Config(value = "transport.vrs", parameters = {
 			@Parameter(name = "port", value = "9002"), @Parameter(name = "basePath", value = "/lisa") }))
 	@Test
 	public void test2() {
-		fail("Not yet implemented");
+	
 	}
 }

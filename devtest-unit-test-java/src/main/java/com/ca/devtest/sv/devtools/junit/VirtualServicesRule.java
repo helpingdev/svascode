@@ -30,6 +30,7 @@ public class VirtualServicesRule implements TestRule {
 
 	private static final Log LOGGER = LogFactory.getLog(VirtualServicesRule.class);
 
+	
 	public  VirtualServicesRule() {
 		
 	}
@@ -51,7 +52,7 @@ public class VirtualServicesRule implements TestRule {
 					LOGGER.info(description.getTestClass() + "is not annoted by DevTestVirtualServer");
 					base.evaluate();
 				} else {
-
+					
 					List<VirtualService> virtualServices = null;
 					try {
 						

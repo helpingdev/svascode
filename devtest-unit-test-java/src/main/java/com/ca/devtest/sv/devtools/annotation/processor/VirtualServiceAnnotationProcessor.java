@@ -22,7 +22,6 @@ import com.ca.devtest.sv.devtools.protocol.builder.ParamatrizedBuilder;
 import com.ca.devtest.sv.devtools.protocol.builder.TransportProtocolBuilderImpl;
 import com.ca.devtest.sv.devtools.services.VirtualService;
 import com.ca.devtest.sv.devtools.services.builder.VirtualServiceBuilder;
-import com.ca.devtest.sv.devtools.services.builder.VirtualServiceVSMVSIBuilder;
 import com.ca.devtest.sv.devtools.utils.Utility;
 
 /**

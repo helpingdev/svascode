@@ -1,0 +1,8 @@
+POST /itkoExamples/TokenBean HTTP/1.1
+ Content-Type: text/xml; charset=UTF-8
+SOAPAction: ""
+User-Agent: Apache CXF 3.1.6
+Pragma: no-cache
+Content-Length: 239
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:getNewToken xmlns:ns2="http://ejb3.examples.itko.com/"><username>gpaco</username><password>gpaco</password></ns2:getNewToken></soap:Body></soap:Envelope>

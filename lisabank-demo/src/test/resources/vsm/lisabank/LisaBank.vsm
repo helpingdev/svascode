@@ -26,7 +26,7 @@
 <file type="rawTransactionStore">{{LISA_RELATIVE_PROJ_ROOT}}/Data/LisaBank.vts</file>
 <file type="session">{{LISA_RELATIVE_PROJ_ROOT}}/VirtualServices/VRScenarios/LisaBank.vr2</file>
 </associatedResources>
-    <Node name="Virtual HTTPS Listener 9081" log=""
+    <Node name="Virtual HTTPS Listener $port" log=""
           type="com.itko.lisa.vse.stateful.protocol.http.HttpListenStep" 
           version="1" 
           uid="null" 
@@ -56,7 +56,7 @@
 
 <outputAsObject>true</outputAsObject>
 <onExceptionStep>abort</onExceptionStep>
-<listenPort>9081</listenPort>
+<listenPort>$port</listenPort>
 <basePath>/</basePath>
 <bindOnly>false</bindOnly>
 <useSSL>false</useSSL>

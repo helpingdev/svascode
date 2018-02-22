@@ -35,28 +35,28 @@ public @interface DevTestVirtualServer {
 	 * 
 	 * @return registry server name.
 	 */
-	String registryHost() default "localhost";
+	String registryHost() default "";
 
 	/**
 	 * VSE name. By default 'VSE'.
 	 * 
 	 * @return VSE name
 	 */
-	String deployServiceToVse() default "VSE";
+	String deployServiceToVse() default "";
 
 	/**
 	 * Devtest user. By default 'svpower'
 	 * 
 	 * @return devtest user
 	 */
-	String login() default "svpower";
+	String login() default "";
 
 	/**
 	 * Devtest password. By default 'svpower'
 	 * 
 	 * @return devtest password
 	 */
-	String password() default "svpower";
+	String password() default "";
 
 	/**
 	 * Group name used to prefix virtual services. Empty by default.
@@ -70,6 +70,6 @@ public @interface DevTestVirtualServer {
 	 * 
 	 * @return protocol to access api
 	 */
-	String protocol() default "http";
+	String protocol() default "";
 
 }

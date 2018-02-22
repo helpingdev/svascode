@@ -6,7 +6,6 @@ package com.ca.devtest.sv.devtools.utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -16,7 +15,6 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -144,6 +142,8 @@ public class PackMarFile {
 							.getBytes();
 					zip.write(data, 0, data.length);
 					updateConfig(config, ressource,serviceName);
+					// fixing bug
+					zip.closeEntry();
 				}
 
 			}

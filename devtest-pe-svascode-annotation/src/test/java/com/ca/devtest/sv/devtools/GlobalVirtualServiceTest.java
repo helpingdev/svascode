@@ -1,7 +1,5 @@
 package com.ca.devtest.sv.devtools;
 
-import static org.junit.Assert.fail;
-
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,17 +30,10 @@ public class GlobalVirtualServiceTest {
 			vrsConfig = @Config(value = "transport.vrs",
 			parameters = { @Parameter(name = "port", value = "9002"), @Parameter(name = "basePath", value = "/lisa") }))
 	
-	
-	
 	@Test
-	public void test1() {
-		fail("Not yet implemented");
+	public void test() {
+		
 	}
 
-	@DevTestVirtualServiceFromVrs(serviceName = "demo", workingFolder = "rrpairs/soapWithVrs", vrsConfig = @Config(value = "transport.vrs", parameters = {
-			@Parameter(name = "port", value = "9002"), @Parameter(name = "basePath", value = "/lisa") }))
-	@Test
-	public void test2() {
-		fail("Not yet implemented");
-	}
+	
 }

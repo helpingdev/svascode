@@ -26,5 +26,7 @@
 		
 		<hostHeaderPassThrough>false</hostHeaderPassThrough>
 		<ssl toClient="false" toServer="false" />
+		<ssl toClient="false" sslClientAuthType="none" toServer="false"/>
+
 	</Protocol>
 </RecordingSession>

@@ -1,0 +1,11 @@
+#############################################################################
+# DevTest Annotation configuration file										#
+# You can overwrite this file by creating local-svascode.properties file 	#
+# in the classpath															#
+#																			#
+#############################################################################
+
+devtest.registry=localhost
+devtest.vse=VSE
+devtest.login=svpower
+password=svpower
