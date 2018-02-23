@@ -65,8 +65,11 @@ public class SimpleDemo {
 
 	@DevTestVirtualService(serviceName = "getListUserTemplate", 
 			basePath = "/itkoExamples/EJB3UserControlBean", 
-			port = 9081, workingFolder = "UserServiceTest/getListUser/Volvo", 
-			parameters={@Parameter(name="myVariable", value="HELLO")},
+			port = 9081, workingFolder = "UserServiceTest/getListUser/template", 
+			parameters={@Parameter(name="email", value="HELLO"),
+			@Parameter(name="nom", value="HELLO"),
+			@Parameter(name="login", value="HELLO"),
+			@Parameter(name="pwd", value="HELLO")},
 			requestDataProtocol = {
 			@Protocol(ProtocolType.DPH_SOAP) })
 	@Test
