@@ -28,23 +28,20 @@ public class VirtualServiceEnvironment {
 	private final String group;
 	private final String userName;
 	private final String password;
-	private final Log LOG=LogFactory.getLog(getClass());
-	
-	
-	
+	private final Log LOG = LogFactory.getLog(getClass());
+
 	protected static final String CREATE_VS_URI = "http://%s:1505/api/Dcm/VSEs/%s/actions/createService";
 	protected static final String DELETE_VS_URI = "http://%s:1505/api/Dcm/VSEs/%s/%s";
 
-	public VirtualServiceEnvironment(String registryHostName,String name, String userName, String password,String group) {
+	public VirtualServiceEnvironment(String registryHostName, String name, String userName, String password,
+			String group) {
 		super();
-		if (SvAsCodeConfigUtil.deployServiceToVse(name) == null)
-			throw new IllegalArgumentException(
-					"Service Environment Name cannot be null");
 		this.name = SvAsCodeConfigUtil.deployServiceToVse(name);
 		this.group = SvAsCodeConfigUtil.group(group);
-		this.registryHostName=SvAsCodeConfigUtil.registryHost(registryHostName);
-		this.userName=SvAsCodeConfigUtil.login(userName);
-		this.password=SvAsCodeConfigUtil.password(password);
+		this.registryHostName = SvAsCodeConfigUtil.registryHost(registryHostName);
+		this.userName = SvAsCodeConfigUtil.login(userName);
+		this.password = SvAsCodeConfigUtil.password(password);
+
 	}
 
 	protected String getName() {
@@ -58,78 +55,85 @@ public class VirtualServiceEnvironment {
 	public String getGroup() {
 		return group;
 	}
+
 	protected String getRegistryHostName() {
 		return registryHostName;
 	}
-	
+
 	/**
 	 * @return
 	 */
-	public String getUserName(){
+	public String getUserName() {
 		return userName;
 	}
+
 	/**
 	 * @param service
 	 * @throws IOException
 	 */
-	public void deployService( VirtualService service) throws IOException {
-		
+	public void deployService(VirtualService service) throws IOException {
+
 		HttpClient httpClient = HttpClients.createDefault();
-		String urlPost=String.format(service.getType().geturlPattern(), getRegistryHostName(), getName());
+		String urlPost = String.format(service.getType().geturlPattern(), getRegistryHostName(), getName());
 
 		HttpPost post = new HttpPost(urlPost);
 		MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 		FileBody contentBody = new FileBody(service.getPackedVirtualService(), ContentType.APPLICATION_JSON);
 		builder.addPart("file", contentBody);
 		post.setEntity(builder.build());
-		
-		post.setHeader("Authorization",
-				String.format("Basic %s", new String(Base64.encodeBase64(new String(userName+":"+password).getBytes()))));
 
-	
-			HttpResponse response = httpClient.execute(post);
-			if(LOG.isDebugEnabled()){
-				LOG.debug("Deploying service "+ service.getDeployedName() +"....");
-				HttpEntity entity = response.getEntity();
-				String responseString = EntityUtils.toString(entity, "UTF-8");
-				LOG.debug("Server Response Code :"+response.getStatusLine().getStatusCode());
-				LOG.debug("Server respond :"+responseString);
-			}
-			if (response.getStatusLine().getStatusCode() != HttpStatus.SC_CREATED) {
-				LOG.error("Error deploying service :"+service.getDeployedName());
-				throw new HttpResponseException(response.getStatusLine().getStatusCode(),
-						"VS creation did not complete normally");
-			}
-			service.getPackedVirtualService().deleteOnExit();
+		post.setHeader("Authorization", String.format("Basic %s",
+				new String(Base64.encodeBase64(new String(userName + ":" + password).getBytes()))));
+
+		HttpResponse response = httpClient.execute(post);
+
+		LOG.info("Deploying service " + service.getDeployedName() + "....");
+		HttpEntity entity = response.getEntity();
+
+		LOG.info("Server Response Code :" + response.getStatusLine().getStatusCode());
+		if (LOG.isDebugEnabled()) {
+			String responseString = EntityUtils.toString(entity, "UTF-8");
+			LOG.debug("Server respond :" + responseString);
+		}
+		if (response.getStatusLine().getStatusCode() != HttpStatus.SC_CREATED) {
+
+			LOG.error("Error deploying service :" + service.getDeployedName());
+			throw new HttpResponseException(response.getStatusLine().getStatusCode(),
+					"VS creation did not complete normally");
+		}
+		service.getPackedVirtualService().deleteOnExit();
 	}
-	
+
 	/**
 	 * @param service
 	 * @throws IOException
 	 */
 	public void unDeployService(VirtualService service) throws IOException {
 		HttpClient httpClient = HttpClients.createDefault();
-		HttpDelete delete = new HttpDelete(String.format(DELETE_VS_URI, getRegistryHostName(),
-				getName(), service.getDeployedName()));
+		HttpDelete delete = new HttpDelete(
+				String.format(DELETE_VS_URI, getRegistryHostName(), getName(), service.getDeployedName()));
 		Base64 b64 = new Base64();
-		delete.setHeader("Authorization",
-				String.format("Basic %s", new String(b64.encodeBase64(new String(userName+":"+password).getBytes()))));
+		delete.setHeader("Authorization", String.format("Basic %s",
+				new String(b64.encodeBase64(new String(userName + ":" + password).getBytes()))));
 
 		HttpResponse response = httpClient.execute(delete);
-		if(LOG.isDebugEnabled()){
-			LOG.debug("UnDeploying service "+ service.getDeployedName() +"....");
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("UnDeploying service " + service.getDeployedName() + "....");
 			HttpEntity entity = response.getEntity();
 			String responseString = EntityUtils.toString(entity, "UTF-8");
-			LOG.debug("Server Response Code :"+response.getStatusLine().getStatusCode());
-			LOG.debug("Server respond :"+responseString);
+			LOG.debug("Server Response Code :" + response.getStatusLine().getStatusCode());
+			LOG.debug("Server respond :" + responseString);
 		}
-			if (response.getStatusLine().getStatusCode() != HttpStatus.SC_NO_CONTENT) {
-				throw new HttpResponseException(response.getStatusLine().getStatusCode(),
-						"VS delete did not complete normally");
-			}
-		
-		
+		if (response.getStatusLine().getStatusCode() != HttpStatus.SC_NO_CONTENT) {
+			HttpEntity entity = response.getEntity();
+			String responseString = EntityUtils.toString(entity, "UTF-8");
+			LOG.error("Server Response Code :" + response.getStatusLine().getStatusCode());
+			LOG.error("Server respond :" + responseString);
+			// throw new
+			// HttpResponseException(response.getStatusLine().getStatusCode(),
+			// "VS delete did not complete normally");
+		}
+
 	}
 
-	
 }

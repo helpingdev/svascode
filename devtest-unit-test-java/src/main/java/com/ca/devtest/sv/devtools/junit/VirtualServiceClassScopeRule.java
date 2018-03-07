@@ -1,5 +1,6 @@
 package com.ca.devtest.sv.devtools.junit;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,11 +14,13 @@ import org.junit.runners.model.Statement;
 import com.ca.devtest.sv.devtools.annotation.DevTestVirtualServer;
 import com.ca.devtest.sv.devtools.annotation.processor.DevTestVirtualServerAnnotationProcessor;
 import com.ca.devtest.sv.devtools.services.VirtualService;
+import com.ca.devtest.sv.devtools.vse.VirtualServerEnvironment;
 
 /**
  * Extend JUnit behaviour for using virtual services. <br/>
- *  
- * Allow virtual services to be deployed before test classes and undeployed after. 
+ * 
+ * Allow virtual services to be deployed before test classes and undeployed
+ * after.
  * 
  * @author gaspa03, bboulch
  *
@@ -28,6 +31,8 @@ public class VirtualServiceClassScopeRule implements TestRule {
 	 * 
 	 */
 	private static final Log LOGGER = LogFactory.getLog(VirtualServiceClassScopeRule.class);
+
+	private VirtualServerEnvironment vse = null;
 
 	/**
 	 * @author gaspa03
@@ -51,19 +56,21 @@ public class VirtualServiceClassScopeRule implements TestRule {
 				beforeClass(testClazz);
 				statement.evaluate();
 			} finally {
-
 				afterClass(testClazz);
+
+				stopVse();
 			}
 
 		}
 
-		private void beforeClass(Class clazz) {
+		private void beforeClass(Class clazz) throws IOException {
 			LOGGER.info("before: " + testClazz);
 
 			doCustomBeforeClass(clazz);
 
 			if (clazzNeedVirtualServices(testClazz)) {
 				listVirtualServicesDeployed = processClazzAnnotations(testClazz);
+				startVse();
 				deployVirtualServices(listVirtualServicesDeployed);
 			}
 		}
@@ -81,19 +88,34 @@ public class VirtualServiceClassScopeRule implements TestRule {
 
 	}
 
-	/**
-	 * @param clazz
-	 */
-	protected void doCustomAfterClass(Class clazz) {
-		LOGGER.debug("doCustomAfterClass: " + clazz);
+	private void startVse() throws IOException {
+		if (!vse.isRunning()) {
+			vse.start();
+			Runtime.getRuntime().addShutdownHook(new Thread() {
+				public void run() {
+					vse.stop();
+				}
+			});
+		}
+	}
+
+	private void stopVse() {
+		// vse.stop();
 
 	}
 
 	/**
 	 * @param clazz
 	 */
-	protected void doCustomBeforeClass(Class clazz) {
-		LOGGER.debug("doCustomBeforeClass: " + clazz);
+	protected void doCustomAfterClass(Class clazz) {
+
+	}
+
+	/**
+	 * @param clazz
+	 * @throws IOException
+	 */
+	protected void doCustomBeforeClass(Class clazz) throws IOException {
 
 	}
 
@@ -157,6 +179,7 @@ public class VirtualServiceClassScopeRule implements TestRule {
 
 			DevTestVirtualServerAnnotationProcessor devtestProcessor = new DevTestVirtualServerAnnotationProcessor(
 					testClazz);
+			vse = devtestProcessor.getVSE();
 			virtualServices.addAll(devtestProcessor.process(testClazz));
 
 		} catch (Exception error) {

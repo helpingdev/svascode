@@ -8,7 +8,7 @@ import com.ca.devtest.sv.devtools.annotation.DevTestVirtualService;
 import com.ca.devtest.sv.devtools.annotation.VirtualServiceType;
 import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
 
-@DevTestVirtualServer(deployServiceToVse = "VSE",groupName="Test")
+@DevTestVirtualServer(groupName="Test")
 public class ExistingVS {
 	@Rule
 	public VirtualServicesRule rules = new VirtualServicesRule();

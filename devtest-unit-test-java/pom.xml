@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ca.devtest.sv.devtools</groupId>
 	<artifactId>devtest-unit-test-java</artifactId>
-	<version>1.1.11-SNAPSHOT</version>
+	<version>1.1.11</version>
 	<name>devtest-unit-test-java</name>
 
 	<description>API to use SV as API with Junit
@@ -29,11 +29,6 @@ This API will cover same scope as WirMock or MokServer</description>
 			<version>4.5.2</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.10</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
 			<version>4.4.5</version>
@@ -43,6 +38,12 @@ This API will cover same scope as WirMock or MokServer</description>
 			<artifactId>httpmime</artifactId>
 			<version>4.5.3</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -63,11 +64,7 @@ This API will cover same scope as WirMock or MokServer</description>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
-		<dependency>
-			<groupId>com.ca.devtest.sv.vse</groupId>
-			<artifactId>ca-devtest-vse</artifactId>
-			<version>10.1</version>
-		</dependency>
+	
 
 	</dependencies>
 	<build>

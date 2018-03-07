@@ -15,6 +15,9 @@ import com.ca.devtest.sv.devtools.DevTestClient;
 import com.ca.devtest.sv.devtools.annotation.DevTestVirtualServer;
 import com.ca.devtest.sv.devtools.exception.VirtualServiceProcessorException;
 import com.ca.devtest.sv.devtools.services.VirtualService;
+import com.ca.devtest.sv.devtools.vse.VirtualServerEnvironment;
+import com.ca.devtest.sv.devtools.vse.VirtualServerEnvironmentFactory;
+import com.ca.devtest.sv.devtools.vse.VirtualServerEnvironmentLocal;
 
 /**
  * @author gaspa03
@@ -23,6 +26,7 @@ import com.ca.devtest.sv.devtools.services.VirtualService;
 public class DevTestVirtualServerAnnotationProcessor {
 
 	private final DevTestClient devtestClient;
+	private final VirtualServerEnvironment vse;
 	private static final Log LOGGER = LogFactory.getLog(DevTestVirtualServerAnnotationProcessor.class);
 	
 
@@ -32,8 +36,19 @@ public class DevTestVirtualServerAnnotationProcessor {
 	public DevTestVirtualServerAnnotationProcessor(Class<?> ownerClazz) {
 		super();
 		devtestClient = buildDevtestClient(ownerClazz);
-
+		vse= buildVSE(ownerClazz);
 	}
+
+
+	/**
+	 * @param clazz
+	 * @return
+	 */
+	private VirtualServerEnvironment buildVSE(Class<?> clazz) {
+		DevTestVirtualServer virtualServer = clazz.getAnnotation(DevTestVirtualServer.class);
+		return VirtualServerEnvironmentFactory.getVseInstance(virtualServer.registryHost(),virtualServer.deployServiceToVse());
+	}
+
 
 	/**
 	 * @param clazz
@@ -75,6 +90,14 @@ public class DevTestVirtualServerAnnotationProcessor {
 		}
 
 		return virtualServices;
+	}
+
+	/**
+	 * @return Wrapper on VSE
+	 */
+	public VirtualServerEnvironment getVSE() {
+		
+		return vse;
 	}
 
 }

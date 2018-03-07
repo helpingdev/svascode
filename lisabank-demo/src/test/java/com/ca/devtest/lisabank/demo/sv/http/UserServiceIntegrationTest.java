@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,16 +20,19 @@ import com.ca.devtest.sv.devtools.annotation.DevTestVirtualServer;
 import com.ca.devtest.sv.devtools.annotation.DevTestVirtualService;
 import com.ca.devtest.sv.devtools.annotation.Protocol;
 import com.ca.devtest.sv.devtools.annotation.ProtocolType;
+import com.ca.devtest.sv.devtools.junit.VirtualServiceClassScopeRule;
 import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = LisaBankClientApplication.class)
 
-@DevTestVirtualServer(registryHost = "localhost", deployServiceToVse = "VSE")
+@DevTestVirtualServer()
 public class UserServiceIntegrationTest {
 	static final Log logger = LogFactory.getLog(UserServiceIntegrationTest.class);
 	@Autowired
 	private BankService bankServices;
+	@ClassRule
+	public static VirtualServiceClassScopeRule ruleClass= new VirtualServiceClassScopeRule();
 	@Rule
 	public VirtualServicesRule rules = new VirtualServicesRule();
 

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,19 +22,18 @@ import com.ca.devtest.sv.devtools.annotation.DevTestVirtualServer;
 import com.ca.devtest.sv.devtools.annotation.DevTestVirtualService;
 import com.ca.devtest.sv.devtools.annotation.Parameter;
 import com.ca.devtest.sv.devtools.annotation.VirtualServiceType;
+import com.ca.devtest.sv.devtools.junit.VirtualServiceClassScopeRule;
 import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = LisaBankClientApplication.class)
-@DevTestVirtualServer(registryHost = "localhost", deployServiceToVse = "VSE", groupName = "LisaBankDemo")
+@DevTestVirtualServer()
 
 public class ExistingVirtualServiceTest {
 
 	// handle VS with Class scope
-	// @ClassRule
-	// public static VirtualServiceClassScopeRule clazzRule = new
-	// VirtualServiceClassScopeRule();
-	//
+	@ClassRule
+	public static VirtualServiceClassScopeRule clazzRule = new VirtualServiceClassScopeRule();
 	@Rule
 	public VirtualServicesRule rules = new VirtualServicesRule();
 
@@ -45,16 +45,16 @@ public class ExistingVirtualServiceTest {
 			@Parameter(name = "port", value = "9081") })
 	@Test
 	public void getListUser() {
-		
+
 		try {
 			User[] users = bankServices.getListUser();
 			assertNotNull(users);
 			printUsers(users);
 			assertEquals(9, users.length);
 		} finally {
-			//recorder.stop();
+			
 		}
-	
+
 	}
 
 	private void printUsers(User[] users) {
@@ -63,14 +63,5 @@ public class ExistingVirtualServiceTest {
 		}
 
 	}
-	/*@Test
-	public void startRecorder(){
-		Params param=new Params(9081, "localhost",9082 );
-		param.enableStringConsoleLogger();
-		param.setBufferSize(20971520);
-		System.out.println(param);
-		Main main = new Main(param);
-		main.start();
-		
-	}*/
+	
 }

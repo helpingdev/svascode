@@ -8,6 +8,14 @@ import org.aeonbits.owner.Config.Sources;
 @Sources({"classpath:local-svascode.porperties","classpath:svascode.porperties"})
 public interface SVasCodeConfig extends Config {
 
+	
+	/**
+	 * DevTest home directory.
+	 * 
+	 * @return registry server name.
+	 */
+	@Key("devtest.home")
+	String devTestHome();
 	/**
 	 * Registry server name. By default 'localhost'.
 	 * 
@@ -21,7 +29,7 @@ public interface SVasCodeConfig extends Config {
 	 * 
 	 * @return VSE name
 	 */
-	@Key("devtest.vse")
+	@Key("devtest.vsename")
 	String deployServiceToVse();
 
 	/**
@@ -47,5 +55,21 @@ public interface SVasCodeConfig extends Config {
 	 */
 	@Key("devtest.protocol")
 	String protocol() ;
+	/**
+	 * Registry URL
+	 * 
+	 * @return url to access to registry
+	 */
+	@Key("devtest.registryUrl")
+	String registryUrl();
+	
+	/**
+	 * embeddedVse
+	 * 
+	 * @return true if VSE is embeddedVse
+	 */
+	@Key("devtest.embeddedVse")
+	boolean embeddedVse();
+	
 
 }

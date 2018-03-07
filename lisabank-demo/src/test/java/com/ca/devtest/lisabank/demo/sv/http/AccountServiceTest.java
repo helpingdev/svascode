@@ -30,7 +30,7 @@ import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = LisaBankClientApplication.class)
-@DevTestVirtualServer(registryHost = "localhost", deployServiceToVse = "VSE")
+@DevTestVirtualServer(registryHost = "localhost")
 
 public class AccountServiceTest {
 	@Autowired

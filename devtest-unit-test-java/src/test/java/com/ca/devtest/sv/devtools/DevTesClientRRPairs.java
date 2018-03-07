@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -18,16 +19,24 @@ import com.ca.devtest.sv.devtools.annotation.Parameter;
 import com.ca.devtest.sv.devtools.annotation.Protocol;
 import com.ca.devtest.sv.devtools.annotation.ProtocolType;
 import com.ca.devtest.sv.devtools.application.SoapClient;
+import com.ca.devtest.sv.devtools.junit.VirtualServiceClassScopeRule;
 import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
 
 /**
  * @author gaspa03
  *
  */
-@DevTestVirtualServer(deployServiceToVse = "VSE")
+@DevTestVirtualServer(deployServiceToVse = "vse-gaspa03")
 public class DevTesClientRRPairs {
+	
+
+	// handle VS with Class scope
+	@ClassRule
+	public static VirtualServiceClassScopeRule clazzRule = new VirtualServiceClassScopeRule();
 	@Rule
 	public VirtualServicesRule rules = new VirtualServicesRule();
+	
+	
 
 	/**
 	 * @throws IOException
@@ -57,7 +66,7 @@ public class DevTesClientRRPairs {
 			@Parameter(name = "port", value = "9002"), @Parameter(name = "basePath", value = "/lisa") }))
 	@Test
 	public void createSoapServicFromVrs() throws IOException, URISyntaxException {
-		int port = 7002;
+		int port = 9002;
 		String path = "/lisa";
 		/* Test */
 		SoapClient soapclient = new SoapClient("localhost", String.valueOf(port));
