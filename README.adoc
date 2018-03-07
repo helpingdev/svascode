@@ -23,7 +23,7 @@ In  the **pom file** of your maven project  add a new repository to get the libr
 		<repository>
 			<id>git-devtest</id>
 			<name>DevTest's Git based repo</name>
-			<url>https://raw.github.com/pgasp/devtest-mvn-repo/master/</url>
+			<url>https://raw.github.com/helpingdev/maven/master/</url>
 		</repository>
 	</repositories>
 ----
@@ -34,7 +34,7 @@ Add below dependency with scope test in your **pom file** :
 	<dependency>
 			<groupId>com.ca.devtest.sv.devtools</groupId>
 			<artifactId>devtest-unit-test-java</artifactId>
-			<version>1.1.8</version>
+			<version>1.1.11</version>
 	</dependency>
 
 ----

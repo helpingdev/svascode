@@ -26,7 +26,7 @@
 		<repository>
 			<id>git-devtest</id>
 			<name>DevTest's Git based repo</name>
-			<url>https://raw.github.com/pgasp/devtest-mvn-repo/master/</url>
+			<url>https://raw.github.com/helpingdev/maven/master/</url>
 		</repository>
 	</repositories>
 	<dependencies>
