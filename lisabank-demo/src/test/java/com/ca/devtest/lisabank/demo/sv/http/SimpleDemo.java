@@ -56,7 +56,7 @@ public class SimpleDemo {
 		printUsers(users);
 		assertEquals(9, users.length);
 	}
-	
+
 	@DevTestVirtualService(serviceName = "getListUser", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
 			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean1", 
 			requestDataProtocol = {

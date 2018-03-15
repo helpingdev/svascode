@@ -70,7 +70,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.aeonbits.owner</groupId>
+			<artifactId>owner</artifactId>
+			<version>1.0.9</version>
+		</dependency>
 		<dependency>
 			<groupId>com.ca.devtest.sv.devtools</groupId>
 			<artifactId>devtest-unit-test-java</artifactId>
