@@ -6,7 +6,7 @@
 #############################################################################
 #devtest.home=${java.io.tmpdir}devTest
 devtest.home=/Users/gaspa03/00-CA/01-Tools/00_DevTest/proto/Demo2
-#devtest.embeddedVse=true
+devtest.embeddedVse=false
 #devtest.vsename=vse
 devtest.registry=localhost
 devtest.registryUrl=tcp://${devtest.registry}:2010/Registry
