@@ -3,7 +3,6 @@ package com.ca.devtest.sv.devtools.utils;
 import java.io.File;
 
 import org.aeonbits.owner.ConfigFactory;
-import org.aeonbits.owner.Config.Key;
 import org.apache.commons.lang.StringUtils;
 
 import com.ca.devtest.sv.devtools.SVasCodeConfig;

@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ca.devtest.sv.devtools.annotation.DevTestVirtualServer;
 import com.ca.devtest.sv.devtools.annotation.processor.DevTestVirtualServerAnnotationProcessor;
@@ -28,7 +28,7 @@ import com.ca.devtest.sv.devtools.services.VirtualService;
  */
 public class VirtualServicesRule implements TestRule {
 
-	private static final Log LOGGER = LogFactory.getLog(VirtualServicesRule.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(VirtualServicesRule.class);
 
 	
 	public  VirtualServicesRule() {

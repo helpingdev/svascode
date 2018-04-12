@@ -1,8 +1,6 @@
 
 package com.ca.devtest.sv.devtools;
 
-import static org.junit.Assert.fail;
-
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;

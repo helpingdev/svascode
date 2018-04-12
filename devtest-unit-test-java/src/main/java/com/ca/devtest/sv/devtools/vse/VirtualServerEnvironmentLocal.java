@@ -16,8 +16,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ca.devtest.sv.devtools.utils.RegistryRestAPI;
 import com.ca.devtest.sv.devtools.utils.SvAsCodeConfigUtil;
@@ -34,7 +34,7 @@ public final class VirtualServerEnvironmentLocal implements VirtualServerEnviron
 	private String registry;
 	private String vseName;
 	private String registryHostName;
-	private static final Log LOG = LogFactory.getLog(VirtualServerEnvironmentLocal.class);
+	private static final Logger LOG = LoggerFactory.getLogger(VirtualServerEnvironmentLocal.class);
 
 	private static final Map<String, VirtualServerEnvironment> dicoVSE = new Hashtable<String, VirtualServerEnvironment>();
 
@@ -86,23 +86,46 @@ public final class VirtualServerEnvironmentLocal implements VirtualServerEnviron
 	@Override
 	public boolean start() throws RuntimeException {
 
+		boolean error = false;
 		try {
 			LOG.info("Starting  Local VSE :" + vseName + "....");
 			install(SvAsCodeConfigUtil.devTestHome());
 			vseProcess = buildProcess(SvAsCodeConfigUtil.devTestHome(), vseName, registry).start();
 			LOG.info("VSE :" + vseName + " pid :" + vseProcess);
-			do {
-				Thread.sleep(1000);
-			} while (!isStarted());
-			return vseProcess.isAlive();
 		} catch (Exception e) {
+			if (null != vseProcess) {
+				vseProcess.destroyForcibly();
+			}
 			throw new RuntimeException("Error: During starting VSE", e);
 		}
+		int iteration = 10;
+		do {
+			if (!vseProcess.isAlive()) {
+
+				vseProcess.destroyForcibly();
+
+				throw new RuntimeException(" Could not start vse: " + vseName + ", please check if registry : "
+						+ registry + " is up and running");
+			}
+			if (iteration == 0) {
+				vseProcess.destroyForcibly();
+				throw new RuntimeException(" VSE " + vseName + " is not started, please check if registry : " + registry
+						+ " is up and running");
+			}
+
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			}
+			iteration--;
+		} while (!isStarted());
+		return vseProcess.isAlive();
 
 	}
 
 	/**
-	 * Request Registry to get VSE status 
+	 * Request Registry to get VSE status
+	 * 
 	 * @return
 	 */
 	private boolean isStarted() {
@@ -244,8 +267,7 @@ public final class VirtualServerEnvironmentLocal implements VirtualServerEnviron
 				java_tmpdir, "-classpath", classpath(devTestHome),
 				"com.itko.lisa.coordinator.VirtualServiceEnvironmentImpl", vse, registryName };
 		ProcessBuilder processBuilder = new ProcessBuilder();
-		processBuilder.command(arguments);
-		processBuilder.inheritIO();
+		processBuilder.command(arguments);		
 		return processBuilder;
 	}
 
@@ -265,13 +287,13 @@ public final class VirtualServerEnvironmentLocal implements VirtualServerEnviron
 
 		return builder.toString();
 	}
-	
-	/* 
-	 * Request Registry to get VSE status 
+
+	/*
+	 * Request Registry to get VSE status
 	 */
 	@Override
 	public boolean isRunning() throws RuntimeException {
 
-		return vseProcess!=null?vseProcess.isAlive():false;
+		return vseProcess != null ? vseProcess.isAlive() : false;
 	}
 }

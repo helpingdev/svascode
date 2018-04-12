@@ -8,8 +8,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ca.devtest.sv.devtools.DevTestClient;
 import com.ca.devtest.sv.devtools.annotation.DevTestVirtualServer;
@@ -17,7 +17,6 @@ import com.ca.devtest.sv.devtools.exception.VirtualServiceProcessorException;
 import com.ca.devtest.sv.devtools.services.VirtualService;
 import com.ca.devtest.sv.devtools.vse.VirtualServerEnvironment;
 import com.ca.devtest.sv.devtools.vse.VirtualServerEnvironmentFactory;
-import com.ca.devtest.sv.devtools.vse.VirtualServerEnvironmentLocal;
 
 /**
  * @author gaspa03
@@ -27,7 +26,7 @@ public class DevTestVirtualServerAnnotationProcessor {
 
 	private final DevTestClient devtestClient;
 	private final VirtualServerEnvironment vse;
-	private static final Log LOGGER = LogFactory.getLog(DevTestVirtualServerAnnotationProcessor.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DevTestVirtualServerAnnotationProcessor.class);
 	
 
 	/**

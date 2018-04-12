@@ -3,8 +3,6 @@ package com.ca.devtest.sv.devtools;
 import java.io.IOException;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -17,6 +15,8 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ca.devtest.sv.devtools.services.VirtualService;
 import com.ca.devtest.sv.devtools.utils.SvAsCodeConfigUtil;
@@ -28,7 +28,7 @@ public class VirtualServiceEnvironment {
 	private final String group;
 	private final String userName;
 	private final String password;
-	private final Log LOG = LogFactory.getLog(getClass());
+	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	protected static final String CREATE_VS_URI = "http://%s:1505/api/Dcm/VSEs/%s/actions/createService";
 	protected static final String DELETE_VS_URI = "http://%s:1505/api/Dcm/VSEs/%s/%s";

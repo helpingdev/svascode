@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ca.devtest.sv.devtools.utils.VelocityRender;
 
@@ -23,7 +23,7 @@ public class TransportProtocolResource implements TransportProtocolDefinition {
 	
 	private File resource;
 	private   Map<String, String> parameters = new HashMap<String,String>();
-	private static final Log LOGGING= LogFactory.getLog(TransportProtocolResource.class);
+	private static final Logger LOGGING= LoggerFactory.getLogger(TransportProtocolResource.class);
 
 	/**
 	 * @param resource
