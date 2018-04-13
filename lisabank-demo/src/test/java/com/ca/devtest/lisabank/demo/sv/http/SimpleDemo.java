@@ -45,7 +45,8 @@ public class SimpleDemo {
 	@Rule
 	public VirtualServicesRule rules = new VirtualServicesRule();
 
-	@DevTestVirtualService(serviceName = "getListUser", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
+	@DevTestVirtualService(serviceName = "getListUser0", basePath = "/itkoExamples/EJB3UserControlBean", 
+			port = 9081, 
 			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean", 
 			requestDataProtocol = {
 			@Protocol(ProtocolType.DPH_SOAP) })
@@ -57,7 +58,7 @@ public class SimpleDemo {
 		assertEquals(9, users.length);
 	}
 
-	@DevTestVirtualService(serviceName = "getListUser", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
+	@DevTestVirtualService(serviceName = "getListUser1", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
 			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean1", 
 			requestDataProtocol = {
 			@Protocol(ProtocolType.DPH_SOAP) })
@@ -67,6 +68,18 @@ public class SimpleDemo {
 		assertNotNull(users);
 		printUsers(users);
 		assertEquals(1, users.length);
+	}
+	
+	@DevTestVirtualService(serviceName = "getListUser2", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
+			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean2", 
+			requestDataProtocol = {
+			@Protocol(ProtocolType.DPH_SOAP) })
+	@Test
+	public void getListUser2() {
+		User[] users = bankServices.getListUser();
+		assertNotNull(users);
+		printUsers(users);
+		assertEquals(2, users.length);
 	}
 /*	
  * @DevTestVirtualService(serviceName = "getListUser0", 
