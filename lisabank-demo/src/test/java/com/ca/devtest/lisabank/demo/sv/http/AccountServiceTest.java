@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.ca.devtest.lisabank.demo.LisaBankClientApplication;
 import com.ca.devtest.lisabank.demo.business.BankService;
 import com.ca.devtest.lisabank.wsdl.Account;
+import com.ca.devtest.lisabank.wsdl.User;
 import com.ca.devtest.sv.devtools.annotation.DevTestVirtualServer;
 import com.ca.devtest.sv.devtools.annotation.DevTestVirtualService;
 import com.ca.devtest.sv.devtools.annotation.Protocol;
@@ -73,6 +74,17 @@ public class AccountServiceTest {
 		assertEquals("Le balance du compte n'est pas conforme", amount, account.getBalance().intValue());
 	}
 
+	@DevTestVirtualService(serviceName = "getListUser2", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
+			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean2", 
+			requestDataProtocol = {
+			@Protocol(ProtocolType.DPH_SOAP) })
+	@Test
+	public void getListUser2() {
+		User[] users = bankServices.getListUser();
+		assertNotNull(users);
+		
+		assertEquals(2, users.length);
+	}
 	
 	
 }
