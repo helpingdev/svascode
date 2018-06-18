@@ -77,10 +77,10 @@ First, flag your Junit class as a Test using CA Virtual Services. This annotatio
 * *deployServiceToVse :* Name of VSE
 * *login :* CA Devtest username _(default value svpower)_
 * *password :* CA Devtest password _(default value svpower)_
- 
+all of this parameters are optional. You could set values in local-svascode.porperties file.
 [source,java,indent=0]
 ----	
-@DevTestVirtualServer(registryHost = "localhost", deployServiceToVse = "VSE")
+@DevTestVirtualServer()
 ----
 Add *VirtualServices* rule as a field member of Junit class. This rule will handle *SV as Code annotations* during Junit life cycle. Rules allow very flexible addition or redefinition of the behavior of each test method in a test class
 [source,java,indent=0]
@@ -97,6 +97,86 @@ Above of each test method, add virtual service annotations. This annotation shou
 	rrpairsFolder = "UserServiceTest/getListUser/EJB3UserControlBean", 
 	requestDataProtocol = {@Protocol(ProtocolType.DPH_SOAP) })
 			
+----
+It's possible to define a set of Virtual Services with Class scope. In this case all virtual services will be deployed once at class level.
+First you should add Junit Class Rule as described below
+[source,java,indent=0]
+----
+	@ClassRule
+	public static VirtualServiceClassScopeRule ruleClass= new VirtualServiceClassScopeRule();
+----
+Then you could use DevTestVirtualService annotations on top of your class. 
+[source,java,indent=0]
+----
+/**
+ * 
+ */
+package com.ca.devtest.lisabank.demo.sv.http;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.ca.devtest.lisabank.demo.LisaBankClientApplication;
+import com.ca.devtest.lisabank.demo.business.BankService;
+import com.ca.devtest.lisabank.wsdl.User;
+import com.ca.devtest.sv.devtools.annotation.DevTestVirtualServer;
+import com.ca.devtest.sv.devtools.annotation.DevTestVirtualService;
+import com.ca.devtest.sv.devtools.annotation.Parameter;
+import com.ca.devtest.sv.devtools.annotation.Protocol;
+import com.ca.devtest.sv.devtools.annotation.ProtocolType;
+import com.ca.devtest.sv.devtools.junit.VirtualServiceClassScopeRule;
+import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
+
+/**
+ * @author pascal.gasp@ca.com
+ *
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = LisaBankClientApplication.class)
+@DevTestVirtualServer()
+
+@DevTestVirtualService(serviceName = "VSClazzScopeSimpleDemo", 
+	basePath = "/itkoExamples/EJB3UserControlBean",
+	port = 9081, 
+	workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean", 
+	requestDataProtocol = {
+		@Protocol(ProtocolType.DPH_SOAP) })
+
+public class VSClazzScopeSimpleDemo {
+	static final Log logger = LogFactory.getLog(VSClazzScopeSimpleDemo.class);
+	@Autowired
+	private BankService bankServices;
+	// handle VS with Class scope
+	@ClassRule
+	public static VirtualServiceClassScopeRule clazzRule = new VirtualServiceClassScopeRule();
+	
+	@Test
+	public void getListUser() {
+		User[] users = bankServices.getListUser();
+		assertNotNull(users);
+		printUsers(users);
+		assertEquals(9, users.length);
+	}
+
+	private void printUsers(User[] users) {
+		for (User user : users) {
+			logger.info(user.getFname() + " " + user.getLname() + " " + user.getLogin());
+		}
+
+	}
+}
+
 ----
 
 == Contributors

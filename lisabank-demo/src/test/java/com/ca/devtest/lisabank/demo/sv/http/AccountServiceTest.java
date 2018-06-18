@@ -31,7 +31,7 @@ import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = LisaBankClientApplication.class)
-@DevTestVirtualServer(registryHost = "localhost")
+@DevTestVirtualServer()
 
 public class AccountServiceTest {
 	@Autowired
