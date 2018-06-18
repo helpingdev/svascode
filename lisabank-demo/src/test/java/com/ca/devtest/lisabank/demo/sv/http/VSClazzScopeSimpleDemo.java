@@ -32,23 +32,23 @@ import com.ca.devtest.sv.devtools.junit.VirtualServiceClassScopeRule;
 @SpringBootTest(classes = LisaBankClientApplication.class)
 // Mark as Test using CA Service Virtualization
 @DevTestVirtualServer()
-// Define Virtual Service with Clazz scope => Deploy once for all methods 
-@DevTestVirtualService(serviceName = "VSClazzScopeSimpleDemo", 
-	basePath = "/itkoExamples/EJB3UserControlBean",
-	port = 9081, 
-	workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean", 
-	requestDataProtocol = {
+// Define Virtual Service with Clazz scope => Deploy once for all methods
+@DevTestVirtualService(serviceName = "VSClazzScopeSimpleDemo",
+basePath = "/itkoExamples/EJB3UserControlBean",
+port = 9081, 
+workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean", 
+requestDataProtocol = {
 		@Protocol(ProtocolType.DPH_SOAP) })
 
 public class VSClazzScopeSimpleDemo {
 	static final Log logger = LogFactory.getLog(VSClazzScopeSimpleDemo.class);
 	@Autowired
 	private BankService bankServices;
-	
+
 	// handle VS with Class scope
 	@ClassRule
 	public static VirtualServiceClassScopeRule clazzRule = new VirtualServiceClassScopeRule();
-	
+
 	@Test
 	public void getListUser() {
 		User[] users = bankServices.getListUser();
@@ -56,7 +56,6 @@ public class VSClazzScopeSimpleDemo {
 		printUsers(users);
 		assertEquals(9, users.length);
 	}
-	
 
 	private void printUsers(User[] users) {
 		for (User user : users) {
