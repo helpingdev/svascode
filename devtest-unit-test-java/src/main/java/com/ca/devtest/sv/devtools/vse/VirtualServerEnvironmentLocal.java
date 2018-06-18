@@ -256,14 +256,17 @@ public final class VirtualServerEnvironmentLocal implements VirtualServerEnviron
 		String security = "-Djava.security.policy=" + devTestHome_Env + separator + "lisa.permissions";
 		String ipv4Stack = "-Djava.net.preferIPv4Stack=true";
 		String language = "-Duser.language=en";
+		String brokerPort ="-Dlisa.pathfinder.broker.port=3009";
+		String brokerHost="-Dlisa.pathfinder.broker.host="+registryHostName;
 		String bindToAddress = "-Dlisa.net.bindToAddress=127.0.0.1";
 		// int port = FreePortFinder.nextFreePort(2013, 2050);
 		int port = 2013;
-		String vse = "--name=tcp://127.0.0.1:" + port + "/" + vseName;
+		String hostName= "127.0.0.1";
+		String vse = "--name=tcp://"+hostName+":" + port + "/" + vseName;
 		String registryName = "--registry=" + registry;
 		String path = System.getProperty("java.home") + separator + "bin" + separator + "java";
 		String[] arguments = new String[] { path, "-server", HeapDumpOnOutOfMemoryError, HeapDumpPath, Xmx, javaEndor,
-				lisa_home, lisa_log, file_encoding, jmx, security, ipv4Stack, language, bindToAddress, lisa_tmp,
+				lisa_home, lisa_log, file_encoding, jmx, security, ipv4Stack, language, bindToAddress, lisa_tmp,brokerHost,brokerPort,
 				java_tmpdir, "-classpath", classpath(devTestHome),
 				"com.itko.lisa.coordinator.VirtualServiceEnvironmentImpl", vse, registryName };
 		ProcessBuilder processBuilder = new ProcessBuilder();

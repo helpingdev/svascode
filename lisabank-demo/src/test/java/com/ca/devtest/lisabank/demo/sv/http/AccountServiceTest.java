@@ -44,7 +44,7 @@ public class AccountServiceTest {
 	@Rule
 	public VirtualServicesRule rules = new VirtualServicesRule();
 
-
+/*
 
 	@DevTestVirtualService(serviceName = "UserServiceTest-EJB3UserControlBean", 
 	port = 9081, basePath = "/itkoExamples/EJB3UserControlBean", 
@@ -57,7 +57,13 @@ public class AccountServiceTest {
 	workingFolder = "AccountServiceTest/createUserWithCheckingAccount/EJB3AccountControlBean", 
 	requestDataProtocol = {
 	@Protocol(ProtocolType.DPH_SOAP) })
+	*/
 	
+	@DevTestVirtualService(serviceName = "UserServiceTest-EJB3AccountControlBean", 
+			port = 9081, basePath = "/itkoExamples/", 
+			workingFolder = "demo/rrpairs", 
+			requestDataProtocol = {
+			@Protocol(ProtocolType.DPH_SOAP) })
 	@Test
 	public void createUserWithCheckingAccount() {
 	

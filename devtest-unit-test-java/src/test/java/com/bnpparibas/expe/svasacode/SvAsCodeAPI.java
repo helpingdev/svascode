@@ -29,7 +29,7 @@ public class SvAsCodeAPI {
 		File vrsFile=new File(rrpairsFolder,"vrs_template.xml");
 		
 		// Create 
-		DevTestClient devtest= new DevTestClient("localhost", "VSE", "svpower", "svpower", "demo");
+		DevTestClient devtest= new DevTestClient("devtest-ubuntu.local", "VSE", "svpower", "svpower", "demo");
 		
 		// build Transport Protocol
 		TransportProtocolFromVrsBuilder transportBuilder = new TransportProtocolFromVrsBuilder(vrsFile);

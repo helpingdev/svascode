@@ -34,7 +34,7 @@ import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = LisaBankClientApplication.class)
-@DevTestVirtualServer(registryHost = "localhost")
+@DevTestVirtualServer()
 public class SimpleDemo {
 	static final Log logger = LogFactory.getLog(SimpleDemo.class);
 	@Autowired
@@ -70,36 +70,14 @@ public class SimpleDemo {
 		assertEquals(1, users.length);
 	}
 	
-	@DevTestVirtualService(serviceName = "getListUser2", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
-			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean2", 
-			requestDataProtocol = {
-			@Protocol(ProtocolType.DPH_SOAP) })
-	@Test
-	public void getListUser2() {
-		User[] users = bankServices.getListUser();
-		assertNotNull(users);
-		printUsers(users);
-		assertEquals(2, users.length);
-	}
-/*	
- * @DevTestVirtualService(serviceName = "getListUser0", 
-			basePath = "/itkoExamples/EJB3UserControlBean", 
-			port = 9081, workingFolder = "Demo/limiteTest", 
-			requestDataProtocol = {
-			@Protocol(ProtocolType.DPH_SOAP) })
-	@Test
-	public void getListUser0() {
-		User[] users = bankServices.getListUser();
-		assertNotNull(users);
-		assertEquals(0, users.length);
-	}
+
 
 	@DevTestVirtualService(serviceName = "getListUserTemplate", 
 			basePath = "/itkoExamples/EJB3UserControlBean", 
 			port = 9081, workingFolder = "UserServiceTest/getListUser/template", 
-			parameters={@Parameter(name="email", value="HELLO"),
-			@Parameter(name="nom", value="HELLO"),
-			@Parameter(name="login", value="HELLO"),
+			parameters={@Parameter(name="email", value="pascal.gasp@gmail.com"),
+			@Parameter(name="nom", value="Gasp"),
+			@Parameter(name="login", value="pgasp"),
 			@Parameter(name="pwd", value="HELLO")},
 			requestDataProtocol = {
 			@Protocol(ProtocolType.DPH_SOAP) })
@@ -110,7 +88,7 @@ public class SimpleDemo {
 		assertEquals(1, users.length);
 		printUsers(users);
 	}
-*/
+
 	private void printUsers(User[] users) {
 		for (User user : users) {
 			logger.info(user.getFname() + " " + user.getLname() + " " + user.getLogin());
