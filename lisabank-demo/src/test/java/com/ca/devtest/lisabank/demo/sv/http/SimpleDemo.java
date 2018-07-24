@@ -34,17 +34,13 @@ import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = LisaBankClientApplication.class)
-@DevTestVirtualServer()
+
 public class SimpleDemo {
 	static final Log logger = LogFactory.getLog(SimpleDemo.class);
 	@Autowired
 	private BankService bankServices;
 
-	@Rule
-	public VirtualServicesRule rules = new VirtualServicesRule();
-
-	@DevTestVirtualService(serviceName = "getListUser0", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean", requestDataProtocol = {
-			@Protocol(ProtocolType.DPH_SOAP) })
+	
 	@Test
 	public void getListUser() {
 		User[] users = bankServices.getListUser();
