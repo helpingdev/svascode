@@ -1,0 +1,4 @@
+ServiceName;EndPoint;TargetServer;TargetPort;LisaPort;RRPairsFolder;RequestFile;ResponseFile
+EJB3UserControlBean;/itkoExamples/EJB3UserControlBean;localhost;9081;50000;rrpairs;/itkoExamples/EJB3UserControlBean/recording-1-req.xml;/itkoExamples/EJB3UserControlBean/recording-1-rsp.xml
+EJB3AccountControlBean;/itkoExamples/EJB3AccountControlBean;localhost;9081;50000;rrpairs;/itkoExamples/EJB3AccountControlBean/recording-2-req.xml;/itkoExamples/EJB3AccountControlBean/recording-2-rsp.xml
+EJB3AccountControlBean;/itkoExamples/EJB3AccountControlBean;localhost;9081;50000;rrpairs;/itkoExamples/EJB3AccountControlBean/recording-3-req.xml;/itkoExamples/EJB3AccountControlBean/recording-3-rsp.xml

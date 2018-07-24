@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+
+<rawTraffic>
+  <transaction id="1">
+    <request operation="POST /itkoExamples/EJB3UserControlBean" matchTolerance="EXACT">
+      <attributes>
+        <parameter name="HTTP-Segment-Attr-0">itkoExamples</parameter>
+        <parameter name="HTTP-Segment-Attr-1">EJB3UserControlBean</parameter>
+        <parameter name="recorded_raw_request_bytes">PHNvYXA6RW52ZWxvcGUgeG1sbnM6c29hcD0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxzb2FwOkJvZHk+PG5zMjphZGRVc2VyIHhtbG5zOm5zMj0iaHR0cDovL2VqYjMuZXhhbXBsZXMuaXRrby5jb20vIj48dXNlcm5hbWU+cGFzY2FsPC91c2VybmFtZT48cGFzc3dvcmQ+cGFzc3dvcmQ8L3Bhc3N3b3JkPjwvbnMyOmFkZFVzZXI+PC9zb2FwOkJvZHk+PC9zb2FwOkVudmVsb3BlPg==</parameter>
+        <parameter name="recorded_raw_request">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soap:Body&gt;&lt;ns2:addUser xmlns:ns2=&quot;http://ejb3.examples.itko.com/&quot;&gt;&lt;username&gt;pascal&lt;/username&gt;&lt;password&gt;password&lt;/password&gt;&lt;/ns2:addUser&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</parameter>
+      </attributes>
+      <metaData>
+        <parameter name="HTTP-Method">POST</parameter>
+        <parameter name="HTTP-URI">/itkoExamples/EJB3UserControlBean</parameter>
+        <parameter name="HTTP-Version">HTTP/1.1</parameter>
+        <parameter name="Content-Type">text/xml; charset=UTF-8</parameter>
+        <parameter name="Accept">*/*</parameter>
+        <parameter name="SOAPAction">&quot;&quot;</parameter>
+        <parameter name="User-Agent">Apache CXF 3.1.6</parameter>
+        <parameter name="Pragma">no-cache</parameter>
+        <parameter name="Host">localhost:9081</parameter>
+        <parameter name="Content-Length">235</parameter>
+      </metaData>
+      <body charset="UTF-8">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soap:Body&gt;&lt;ns2:addUser xmlns:ns2=&quot;http://ejb3.examples.itko.com/&quot;&gt;&lt;username&gt;pascal&lt;/username&gt;&lt;password&gt;password&lt;/password&gt;&lt;/ns2:addUser&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</body>
+    </request>
+    <responses>
+      <response thinkTime="36">
+        <metaData>
+          <parameter name="HTTP-Version">HTTP/1.1</parameter>
+          <parameter name="HTTP-Response-Code">200</parameter>
+          <parameter name="HTTP-Response-Code-Text">OK</parameter>
+          <parameter name="Server">LISA/Virtual-Environment-Server</parameter>
+          <parameter name="X-Powered-By">LISA/10.2.4 (10.2.4.153)</parameter>
+          <parameter name="Content-Type">text</parameter>
+          <parameter name="Content-Length">478</parameter>
+          <parameter name="Date">{{=httpNow()}}</parameter>
+        </metaData>
+        <body charset="UTF-8">&lt;env:Envelope xmlns:env=&apos;http://schemas.xmlsoap.org/soap/envelope/&apos;&gt;&#10;&#9;&lt;env:Header&gt;&lt;/env:Header&gt;&#10;&#9;&lt;env:Body&gt;&#10;&#9;&#9;&lt;ns2:addUserResponse xmlns:ns2=&quot;http://ejb3.examples.itko.com/&quot;&gt;&#10;&#9;&#9;&#9;&lt;return&gt;&#10;&#9;&#9;&#9;&#9;&lt;email&gt;&lt;/email&gt;&#10;&#9;&#9;&#9;&#9;&lt;fname&gt;&lt;/fname&gt;&#10;&#9;&#9;&#9;&#9;&lt;lname&gt;&lt;/lname&gt;&#10;&#9;&#9;&#9;&#9;&lt;login&gt;pascal&lt;/login&gt;&#10;&#9;&#9;&#9;&#9;&lt;newFlag&gt;true&lt;/newFlag&gt;&#10;&#9;&#9;&#9;&#9;&lt;phone&gt;&lt;/phone&gt;&#10;&#9;&#9;&#9;&#9;&lt;pwd&gt;W6ph5Mm5Pz8GgiULbPgzG37mj9g=&lt;/pwd&gt;&#10;&#9;&#9;&#9;&#9;&lt;roleKey&gt;REGULAR&lt;/roleKey&gt;&#10;&#9;&#9;&#9;&#9;&lt;ssn&gt;&lt;/ssn&gt;&#10;&#9;&#9;&#9;&lt;/return&gt;&#10;&#9;&#9;&lt;/ns2:addUserResponse&gt;&#10;&#9;&lt;/env:Body&gt;&#10;&lt;/env:Envelope&gt;</body>
+      </response>
+    </responses>
+  </transaction>
+  <transaction id="2">
+    <request operation="POST /itkoExamples/EJB3AccountControlBean" matchTolerance="EXACT">
+      <attributes>
+        <parameter name="HTTP-Segment-Attr-0">itkoExamples</parameter>
+        <parameter name="HTTP-Segment-Attr-1">EJB3AccountControlBean</parameter>
+        <parameter name="recorded_raw_request_bytes">PHNvYXA6RW52ZWxvcGUgeG1sbnM6c29hcD0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxzb2FwOkJvZHk+PG5zMjphZGRBY2NvdW50IHhtbG5zOm5zMj0iaHR0cDovL2VqYjMuZXhhbXBsZXMuaXRrby5jb20vIj48dXNlcm5hbWU+cGFzY2FsPC91c2VybmFtZT48YWNjb3VudE9iaj48YmFsYW5jZT4xMDAwPC9iYWxhbmNlPjx0eXBlPkNIRUNLSU5HPC90eXBlPjwvYWNjb3VudE9iaj48L25zMjphZGRBY2NvdW50Pjwvc29hcDpCb2R5Pjwvc29hcDpFbnZlbG9wZT4=</parameter>
+        <parameter name="recorded_raw_request">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soap:Body&gt;&lt;ns2:addAccount xmlns:ns2=&quot;http://ejb3.examples.itko.com/&quot;&gt;&lt;username&gt;pascal&lt;/username&gt;&lt;accountObj&gt;&lt;balance&gt;1000&lt;/balance&gt;&lt;type&gt;CHECKING&lt;/type&gt;&lt;/accountObj&gt;&lt;/ns2:addAccount&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</parameter>
+      </attributes>
+      <metaData>
+        <parameter name="HTTP-Method">POST</parameter>
+        <parameter name="HTTP-URI">/itkoExamples/EJB3AccountControlBean</parameter>
+        <parameter name="HTTP-Version">HTTP/1.1</parameter>
+        <parameter name="Content-Type">text/xml; charset=UTF-8</parameter>
+        <parameter name="Accept">*/*</parameter>
+        <parameter name="SOAPAction">&quot;&quot;</parameter>
+        <parameter name="Token">null</parameter>
+        <parameter name="User-Agent">Apache CXF 3.1.6</parameter>
+        <parameter name="Pragma">no-cache</parameter>
+        <parameter name="Host">localhost:9081</parameter>
+        <parameter name="Content-Length">281</parameter>
+      </metaData>
+      <body charset="UTF-8">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soap:Body&gt;&lt;ns2:addAccount xmlns:ns2=&quot;http://ejb3.examples.itko.com/&quot;&gt;&lt;username&gt;pascal&lt;/username&gt;&lt;accountObj&gt;&lt;balance&gt;1000&lt;/balance&gt;&lt;type&gt;CHECKING&lt;/type&gt;&lt;/accountObj&gt;&lt;/ns2:addAccount&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</body>
+    </request>
+    <responses>
+      <response thinkTime="7">
+        <metaData>
+          <parameter name="HTTP-Version">HTTP/1.1</parameter>
+          <parameter name="HTTP-Response-Code">200</parameter>
+          <parameter name="HTTP-Response-Code-Text">OK</parameter>
+          <parameter name="Server">LISA/Virtual-Environment-Server</parameter>
+          <parameter name="X-Powered-By">LISA/10.2.4 (10.2.4.153)</parameter>
+          <parameter name="Content-Type">text</parameter>
+          <parameter name="Content-Length">267</parameter>
+          <parameter name="Date">{{=httpNow()}}</parameter>
+        </metaData>
+        <body charset="UTF-8">&lt;env:Envelope xmlns:env=&apos;http://schemas.xmlsoap.org/soap/envelope/&apos;&gt;&#10;&#9;&lt;env:Header&gt;&lt;/env:Header&gt;&#10;&#9;&lt;env:Body&gt;&#10;&#9;&#9;&lt;ns2:addAccountResponse xmlns:ns2=&quot;http://ejb3.examples.itko.com/&quot;&gt;&#10;&#9;&#9;&#9;&lt;return&gt;206403687921&lt;/return&gt;&#10;&#9;&#9;&lt;/ns2:addAccountResponse&gt;&#10;&#9;&lt;/env:Body&gt;&#10;&lt;/env:Envelope&gt;</body>
+      </response>
+    </responses>
+  </transaction>
+  <transaction id="3">
+    <request operation="POST /itkoExamples/EJB3AccountControlBean" matchTolerance="EXACT">
+      <attributes>
+        <parameter name="HTTP-Segment-Attr-0">itkoExamples</parameter>
+        <parameter name="HTTP-Segment-Attr-1">EJB3AccountControlBean</parameter>
+        <parameter name="recorded_raw_request_bytes">PHNvYXA6RW52ZWxvcGUgeG1sbnM6c29hcD0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxzb2FwOkJvZHk+PG5zMjpnZXRBY2NvdW50IHhtbG5zOm5zMj0iaHR0cDovL2VqYjMuZXhhbXBsZXMuaXRrby5jb20vIj48YWNjb3VudElkPjIwNjQwMzY4NzkyMTwvYWNjb3VudElkPjwvbnMyOmdldEFjY291bnQ+PC9zb2FwOkJvZHk+PC9zb2FwOkVudmVsb3BlPg==</parameter>
+        <parameter name="recorded_raw_request">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soap:Body&gt;&lt;ns2:getAccount xmlns:ns2=&quot;http://ejb3.examples.itko.com/&quot;&gt;&lt;accountId&gt;206403687921&lt;/accountId&gt;&lt;/ns2:getAccount&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</parameter>
+      </attributes>
+      <metaData>
+        <parameter name="HTTP-Method">POST</parameter>
+        <parameter name="HTTP-URI">/itkoExamples/EJB3AccountControlBean</parameter>
+        <parameter name="HTTP-Version">HTTP/1.1</parameter>
+        <parameter name="Content-Type">text/xml; charset=UTF-8</parameter>
+        <parameter name="Accept">*/*</parameter>
+        <parameter name="SOAPAction">&quot;&quot;</parameter>
+        <parameter name="Token">null</parameter>
+        <parameter name="User-Agent">Apache CXF 3.1.6</parameter>
+        <parameter name="Pragma">no-cache</parameter>
+        <parameter name="Host">localhost:9081</parameter>
+        <parameter name="Content-Length">220</parameter>
+      </metaData>
+      <body charset="UTF-8">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soap:Body&gt;&lt;ns2:getAccount xmlns:ns2=&quot;http://ejb3.examples.itko.com/&quot;&gt;&lt;accountId&gt;206403687921&lt;/accountId&gt;&lt;/ns2:getAccount&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</body>
+    </request>
+    <responses>
+      <response thinkTime="3">
+        <metaData>
+          <parameter name="HTTP-Version">HTTP/1.1</parameter>
+          <parameter name="HTTP-Response-Code">200</parameter>
+          <parameter name="HTTP-Response-Code-Text">OK</parameter>
+          <parameter name="Server">LISA/Virtual-Environment-Server</parameter>
+          <parameter name="X-Powered-By">LISA/10.2.4 (10.2.4.153)</parameter>
+          <parameter name="Content-Type">text</parameter>
+          <parameter name="Content-Length">342</parameter>
+          <parameter name="Date">{{=httpNow()}}</parameter>
+        </metaData>
+        <body charset="UTF-8">&lt;env:Envelope xmlns:env=&apos;http://schemas.xmlsoap.org/soap/envelope/&apos;&gt;&#10;&#9;&lt;env:Header&gt;&lt;/env:Header&gt;&#10;&#9;&lt;env:Body&gt;&#10;&#9;&#9;&lt;ns2:getAccountResponse xmlns:ns2=&quot;http://ejb3.examples.itko.com/&quot;&gt;&#10;&#9;&#9;&#9;&lt;return&gt;&#10;&#9;&#9;&#9;&#9;&lt;balance&gt;1000.00&lt;/balance&gt;&#10;&#9;&#9;&#9;&#9;&lt;id&gt;206403687921&lt;/id&gt;&#10;&#9;&#9;&#9;&#9;&lt;type&gt;CHECKING&lt;/type&gt;&#10;&#9;&#9;&#9;&lt;/return&gt;&#10;&#9;&#9;&lt;/ns2:getAccountResponse&gt;&#10;&#9;&lt;/env:Body&gt;&#10;&lt;/env:Envelope&gt;</body>
+      </response>
+    </responses>
+  </transaction>
+</rawTraffic>

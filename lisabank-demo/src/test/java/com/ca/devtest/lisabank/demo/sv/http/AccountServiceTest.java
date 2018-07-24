@@ -57,7 +57,6 @@ public class AccountServiceTest {
 	@Protocol(ProtocolType.DPH_SOAP) })
 	
 	
-
 	@Test
 	public void createUserWithCheckingAccount() {
 	
