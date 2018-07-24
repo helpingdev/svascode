@@ -34,22 +34,14 @@ import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = LisaBankClientApplication.class)
-@DevTestVirtualServer()
+
 public class SimpleDemo {
 	static final Log logger = LogFactory.getLog(SimpleDemo.class);
 	@Autowired
 	private BankService bankServices;
 	// handle VS with Class scope
-	@ClassRule
-	public static VirtualServiceClassScopeRule clazzRule = new VirtualServiceClassScopeRule();
-	@Rule
-	public VirtualServicesRule rules = new VirtualServicesRule();
 
-	@DevTestVirtualService(serviceName = "getListUser0", basePath = "/itkoExamples/EJB3UserControlBean", 
-			port = 9081, 
-			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean", 
-			requestDataProtocol = {
-			@Protocol(ProtocolType.DPH_SOAP) })
+
 	@Test
 	public void getListUser() {
 		User[] users = bankServices.getListUser();
@@ -58,36 +50,10 @@ public class SimpleDemo {
 		assertEquals(9, users.length);
 	}
 
-	@DevTestVirtualService(serviceName = "getListUser1", basePath = "/itkoExamples/EJB3UserControlBean", port = 9081, 
-			workingFolder = "UserServiceTest/getListUser/EJB3UserControlBean1", 
-			requestDataProtocol = {
-			@Protocol(ProtocolType.DPH_SOAP) })
-	@Test
-	public void getListUser1() {
-		User[] users = bankServices.getListUser();
-		assertNotNull(users);
-		printUsers(users);
-		assertEquals(1, users.length);
-	}
 	
 
 
-	@DevTestVirtualService(serviceName = "getListUserTemplate", 
-			basePath = "/itkoExamples/EJB3UserControlBean", 
-			port = 9081, workingFolder = "UserServiceTest/getListUser/template", 
-			parameters={@Parameter(name="email", value="pascal.gasp@gmail.com"),
-			@Parameter(name="nom", value="Gasp"),
-			@Parameter(name="login", value="pgasp"),
-			@Parameter(name="pwd", value="HELLO")},
-			requestDataProtocol = {
-			@Protocol(ProtocolType.DPH_SOAP) })
-	@Test
-	public void getListUserTemplate() {
-		User[] users = bankServices.getListUser();
-		assertNotNull(users);
-		assertEquals(1, users.length);
-		printUsers(users);
-	}
+
 
 	private void printUsers(User[] users) {
 		for (User user : users) {
