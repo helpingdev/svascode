@@ -9,6 +9,21 @@
 		<workspace>${project.basedir}/src/main/resources</workspace>
 		<services.definition>${workspace}/services.yml</services.definition>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>git-devtest</id>
+			<name>DevTest's Git based repo</name>
+			<url>https://raw.github.com/helpingdev/maven/master/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>git-devtest</id>
+			<name>DevTest's Git based repo</name>
+			<url>https://raw.github.com/helpingdev/maven/master/</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
