@@ -16,9 +16,9 @@ service:
         listenport: '18009'
       targetedVSE: VSE
       
-    - name: search_client_2
+    - name: search_client_3
       group: demo
       workingFolder: ./search_client
       configuration:
-        listenport: '18009'
+        listenport: '18019'
       targetedVSE: VSE
