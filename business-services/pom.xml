@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ca.devtest.sv</groupId>
+	<artifactId>demo-sv-data</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<workspace>${project.basedir}/src/main/resources</workspace>
+		<services.definition>${workspace}/services.yml</services.definition>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.ca.devtest.sv.devtools</groupId>
+				<artifactId>svascode-maven-plugin</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<configuration>
+					<registryHostName>localhost</registryHostName>
+					<workspace>${workspace}</workspace>
+					<servicesDefinitionFile>${services.definition}</servicesDefinitionFile>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

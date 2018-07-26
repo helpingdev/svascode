@@ -1,0 +1,17 @@
+# Details of a services
+---
+definition: "./vrs_template.xml"
+service:
+    - name: search_client
+      group: demo
+      workingFolder: ./search_client
+      configuration:
+        listenport: '18001'
+      targetedVSE: VSE
+      
+    - name: search_client_2
+      group: demo
+      workingFolder: ./search_client
+      configuration:
+        listenport: '18001'
+      targetedVSE: VSE

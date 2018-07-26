@@ -1,0 +1,11 @@
+#############################################################################
+# DevTest Annotation configuration file										#
+#  overwrite svascode.properties file 										#
+# in the classpath															#
+#																			#
+#############################################################################
+#devtest.home=${java.io.tmpdir}devTest
+#Sdevtest.home=/Users/gaspa03/00-CA/01-Tools/00_DevTest/proto/Demo2
+devtest.embeddedVse=false
+devtest.login=svpower
+devtest.password=svpower
