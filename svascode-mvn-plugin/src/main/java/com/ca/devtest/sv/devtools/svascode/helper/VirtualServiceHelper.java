@@ -44,7 +44,7 @@ public class VirtualServiceHelper {
 
 	private static void propagateDefaultValue(VirtualServicesModel result) {
 		
-		List<VirtualServiceModel> services= result.getService();
+		List<VirtualServiceModel> services= result.getServices();
 		for (VirtualServiceModel virtualServiceModel : services) {
 			if(StringUtils.isEmpty(virtualServiceModel.getDefinition())){
 				virtualServiceModel.setDefinition(result.getDefinition());

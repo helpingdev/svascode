@@ -78,7 +78,7 @@ public class SVasCode extends AbstractMojo {
 	private String servicesDefinitionFile;
 
 	public void execute() throws MojoExecutionException {
-		
+
 		getLog().info("Load service configuration file <" + servicesDefinitionFile + "... ");
 		workspaceDir = new File(workspace);
 		if (!workspaceDir.exists()) {
@@ -89,7 +89,7 @@ public class SVasCode extends AbstractMojo {
 		VirtualServicesModel services = VirtualServiceHelper
 				.loadVirtualServiceDefinitions(new File(servicesDefinitionFile));
 
-		getLog().info("Should deploy  " + services.getService().size() + " services.");
+		getLog().info("Should deploy  " + services.getServices().size() + " services.");
 
 		List<VirtualService> virtualServices = new ArrayList<VirtualService>();
 		try {
@@ -108,7 +108,7 @@ public class SVasCode extends AbstractMojo {
 
 	private void checkServer() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
@@ -134,30 +134,32 @@ public class SVasCode extends AbstractMojo {
 	 */
 	private List<VirtualService> buildServices(VirtualServicesModel services) throws IOException {
 
-		List<VirtualServiceModel> models = services.getService();
+		List<VirtualServiceModel> models = services.getServices();
 		List<VirtualService> virtualServices = new ArrayList<VirtualService>();
-
+		List<DevTestClient> targetedVSEs = null;
 		for (VirtualServiceModel virtualServiceModel : models) {
 			File rrpairsFolder = new File(workspaceDir, virtualServiceModel.getWorkingFolder());
 			File vrsFile = new File(workspaceDir, virtualServiceModel.getDefinition());
-			// Create
-			DevTestClient devtest = new DevTestClient(registryHostName, virtualServiceModel.getTargetedVSE(), user,
-					password, virtualServiceModel.getGroup());
+
+			List<String> tagetedVSE = virtualServiceModel.getTargetedVSE();
 
 			// build Transport Protocol
 			TransportProtocolFromVrsBuilder transportBuilder = new TransportProtocolFromVrsBuilder(vrsFile);
 			// Optional:fill out parameter in your VRS file
 			propagateConfig(transportBuilder, virtualServiceModel.getConfiguration());
+			for (String vseName : tagetedVSE) {
+				DevTestClient devtest = new DevTestClient(registryHostName, vseName, user, password,
+						virtualServiceModel.getGroup());
+				VirtualServiceBuilder vsbuilder = devtest.fromRRPairs(virtualServiceModel.getName(), rrpairsFolder);
+				vsbuilder.over(transportBuilder.build());
 
-			// Virtual Service builder
-			VirtualServiceBuilder vsbuilder = devtest.fromRRPairs(virtualServiceModel.getName(), rrpairsFolder);
-			vsbuilder.over(transportBuilder.build());
+				// Optional : fill out parameters in you rrpairs file
+				propagateConfig(vsbuilder, virtualServiceModel.getConfiguration());
+				// Virtual Service
+				VirtualService sv = vsbuilder.build();
+				virtualServices.add(sv);
 
-			// Optional : fill out parameters in you rrpairs file
-			propagateConfig(vsbuilder, virtualServiceModel.getConfiguration());
-			// Virtual Service
-			VirtualService sv = vsbuilder.build();
-			virtualServices.add(sv);
+			}
 
 		}
 		return virtualServices;

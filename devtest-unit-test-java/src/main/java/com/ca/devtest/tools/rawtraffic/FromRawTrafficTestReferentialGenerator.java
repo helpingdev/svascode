@@ -255,7 +255,10 @@ public class FromRawTrafficTestReferentialGenerator {
 	 */
 	private static File writeBeforeDecodeXML(Node item, Node metaData, String nameofScenario, int indice,
 			String reqorres, File directory) throws XPathExpressionException {
-		String content = item.getNodeValue().replace(System.getProperty("line.separator"), "");
+		String content = "";
+		if( null!=item){
+			content=item.getNodeValue().replace(System.getProperty("line.separator"), "");
+		}
 		String message =null;
 		if(null!=metaData){
 			String header = handleMetaData(metaData);

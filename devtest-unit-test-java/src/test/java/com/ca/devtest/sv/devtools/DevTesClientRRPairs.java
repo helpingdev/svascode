@@ -108,4 +108,20 @@ public class DevTesClientRRPairs {
 		String response = soapclient.callJSONService(path, request);
 
 	}
+	
+	
+	@DevTestVirtualServiceFromVrs(serviceName = "swagger", workingFolder = "rrpairs/swagger", vrsConfig = @Config(value = "swagger.vrs", parameters = {
+			@Parameter(name = "port", value = "8010"), @Parameter(name = "basePath", value = "/") }))
+	@Test
+	public void createSwaggerServiceFromVrs() throws IOException, URISyntaxException {
+		int port = 8010;
+		String path = "/";
+		/* Test */
+		SoapClient soapclient = new SoapClient("localhost", String.valueOf(port));
+		File requestFile = new File(
+				getClass().getClassLoader().getResource("rrpairs/searchOrder/searchOrder-Final-1-req.xml").toURI());
+		String request = FileUtils.readFileToString(requestFile, "UTF-8");
+		String response = soapclient.callJSONService(path, request);
+
+	}
 }

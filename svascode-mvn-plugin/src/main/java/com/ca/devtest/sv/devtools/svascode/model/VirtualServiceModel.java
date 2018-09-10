@@ -3,6 +3,7 @@
  */
 package com.ca.devtest.sv.devtools.svascode.model;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,7 +24,7 @@ public final class VirtualServiceModel {
 	
 	private String workingFolder;
 	
-	private String targetedVSE;
+	private List<String> targetedVSE;
 
 	
 	/**
@@ -67,19 +68,7 @@ public final class VirtualServiceModel {
 		this.workingFolder = workingFolder;
 	}
 
-	/**
-	 * @return the targetedVSE
-	 */
-	public final String getTargetedVSE() {
-		return targetedVSE;
-	}
-
-	/**
-	 * @param targetedVSE the targetedVSE to set
-	 */
-	public final void setTargetedVSE(String targetedVSE) {
-		this.targetedVSE = targetedVSE;
-	}
+	
 
 	/**
 	 * @return the name
@@ -108,5 +97,21 @@ public final class VirtualServiceModel {
 	public final void setDefinition(String definition) {
 		this.definition = definition;
 	}
+
+	/**
+	 * @return the targetedVSE
+	 */
+	public final List<String> getTargetedVSE() {
+		return targetedVSE;
+	}
+
+	/**
+	 * @param targetedVSE the targetedVSE to set
+	 */
+	public final void setTargetedVSE(List<String> targetedVSE) {
+		this.targetedVSE = targetedVSE;
+	}
+
+	
 
 }

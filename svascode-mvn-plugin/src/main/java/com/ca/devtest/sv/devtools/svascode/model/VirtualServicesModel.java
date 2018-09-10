@@ -13,20 +13,20 @@ public final class VirtualServicesModel {
 	
 	private String definition;
 	
-	private List<VirtualServiceModel> service;
+	private List<VirtualServiceModel> services;
 
 	/**
-	 * @return the service
+	 * @return the services
 	 */
-	public final List<VirtualServiceModel> getService() {
-		return service;
+	public final List<VirtualServiceModel> getServices() {
+		return services;
 	}
 
 	/**
-	 * @param service the service to set
+	 * @param services the services to set
 	 */
-	public final void setService(List<VirtualServiceModel> service) {
-		this.service = service;
+	public final void setServices(List<VirtualServiceModel> service) {
+		this.services = service;
 	}
 
 	/**
