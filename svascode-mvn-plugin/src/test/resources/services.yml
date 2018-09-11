@@ -1,20 +1,12 @@
 # Details of a services
 ---
 definition: "./vrs_template.xml"
-service:
+services:
     - name: cars
       group: cars
-      definition: "./cars.vrs"
+      definition: "./cars/cars.vrs"
       workingFolder: ./cars
       configuration:
         listenport: '7001'
       targetedVSE: 
-      - VSE
-    - name: cars2
-      group: cars
-      definition: "./cars.vrs"
-      workingFolder: ./cars
-      configuration:
-        listenport: '7001'
-      targetedVSE: 
-      - VSE
+      - vse-perf

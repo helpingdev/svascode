@@ -32,8 +32,10 @@ import com.ca.devtest.sv.devtools.protocol.builder.TransportProtocolFromVrsBuild
 import com.ca.devtest.sv.devtools.services.VirtualService;
 import com.ca.devtest.sv.devtools.services.builder.VirtualServiceBuilder;
 import com.ca.devtest.sv.devtools.svascode.helper.VirtualServiceHelper;
+import com.ca.devtest.sv.devtools.svascode.model.CompositeVirtualService;
 import com.ca.devtest.sv.devtools.svascode.model.VirtualServiceModel;
 import com.ca.devtest.sv.devtools.svascode.model.VirtualServicesModel;
+import com.ca.devtest.sv.devtools.utils.api.ServiceAPI;
 
 /**
  * A goal to generate code.
@@ -91,7 +93,7 @@ public class SVasCode extends AbstractMojo {
 
 		getLog().info("Should deploy  " + services.getServices().size() + " services.");
 
-		List<VirtualService> virtualServices = new ArrayList<VirtualService>();
+		List<CompositeVirtualService> virtualServices = new ArrayList<CompositeVirtualService>();
 		try {
 			virtualServices.addAll(buildServices(services));
 		} catch (IOException e) {
@@ -114,14 +116,16 @@ public class SVasCode extends AbstractMojo {
 	/**
 	 * @param virtualServices
 	 */
-	private void deployVirtualServices(List<VirtualService> virtualServices) {
+	private void deployVirtualServices(List<CompositeVirtualService> virtualServices) {
 
-		for (VirtualService virtualService : virtualServices) {
-			getLog().info("deploying service <" + virtualService.getName() + ">");
+		for (CompositeVirtualService virtualService : virtualServices) {
+			getLog().info("deploying service <" + virtualService.getService().getDeployedName() + ">");
 			try {
-				virtualService.deploy();
+				virtualService.getService().deploy();
+				//FIXME Change this code
+				//ServiceAPI.updateServiceStatus(registryHostName, virtualService.getModel().getTargetedVSE().get(0), user, password, virtualService.getModel());
 			} catch (IOException e) {
-				getLog().warn("Error during deployement of service <" + virtualService.getName() + ">");
+				getLog().warn("Error during deployement of service <" + virtualService.getService().getDeployedName() + ">");
 			}
 		}
 
@@ -132,10 +136,10 @@ public class SVasCode extends AbstractMojo {
 	 * @return
 	 * @throws IOException
 	 */
-	private List<VirtualService> buildServices(VirtualServicesModel services) throws IOException {
+	private List<CompositeVirtualService> buildServices(VirtualServicesModel services) throws IOException {
 
 		List<VirtualServiceModel> models = services.getServices();
-		List<VirtualService> virtualServices = new ArrayList<VirtualService>();
+		List<CompositeVirtualService> virtualServices = new ArrayList<CompositeVirtualService>();
 		List<DevTestClient> targetedVSEs = null;
 		for (VirtualServiceModel virtualServiceModel : models) {
 			File rrpairsFolder = new File(workspaceDir, virtualServiceModel.getWorkingFolder());
@@ -157,7 +161,7 @@ public class SVasCode extends AbstractMojo {
 				propagateConfig(vsbuilder, virtualServiceModel.getConfiguration());
 				// Virtual Service
 				VirtualService sv = vsbuilder.build();
-				virtualServices.add(sv);
+				virtualServices.add(new CompositeVirtualService(virtualServiceModel,sv));
 
 			}
 

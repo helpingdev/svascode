@@ -15,10 +15,10 @@ public final class VirtualServiceModel {
 	private String name; 
 	private String group;
 	private String definition;
-	
-	
-
-
+	private int capacity =1;
+	private int thinkScale=100;
+	private boolean autoRestart=true;
+	private String executionMode="EFFICIENT";
 
 	private Map<String, String> configuration;
 	
@@ -110,6 +110,62 @@ public final class VirtualServiceModel {
 	 */
 	public final void setTargetedVSE(List<String> targetedVSE) {
 		this.targetedVSE = targetedVSE;
+	}
+
+	/**
+	 * @return the capacity
+	 */
+	public final int getCapacity() {
+		return capacity;
+	}
+
+	/**
+	 * @param capacity the capacity to set
+	 */
+	public final void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	/**
+	 * @return the thinkScale
+	 */
+	public final int getThinkScale() {
+		return thinkScale;
+	}
+
+	/**
+	 * @param thinkScale the thinkScale to set
+	 */
+	public final void setThinkScale(int thinkScale) {
+		this.thinkScale = thinkScale;
+	}
+
+	/**
+	 * @return the autoRestart
+	 */
+	public final boolean isAutoRestart() {
+		return autoRestart;
+	}
+
+	/**
+	 * @param autoRestart the autoRestart to set
+	 */
+	public final void setAutoRestart(boolean autoRestart) {
+		this.autoRestart = autoRestart;
+	}
+
+	/**
+	 * @return the executionMode
+	 */
+	public final String getExecutionMode() {
+		return executionMode;
+	}
+
+	/**
+	 * @param executionMode the executionMode to set
+	 */
+	public final void setExecutionMode(String executionMode) {
+		this.executionMode = executionMode;
 	}
 
 	
