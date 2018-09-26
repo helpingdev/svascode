@@ -89,6 +89,15 @@ public final class SvAsCodeConfigUtil {
 	public static String registryUrl() {
 		return CONFIG.registryUrl();
 	}
+	/**
+	 * Registry PORT
+	 * 
+	 * @return url to access to registry
+	 */
+	public static String registryPort() {
+		return CONFIG.registryPort();
+	}
+	
 
 	/**
 	 * DevTest home directory.

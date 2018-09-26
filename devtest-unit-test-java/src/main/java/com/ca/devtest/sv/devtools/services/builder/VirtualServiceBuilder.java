@@ -14,6 +14,8 @@ import com.ca.devtest.sv.devtools.protocol.DataProtocolDefinition;
 import com.ca.devtest.sv.devtools.protocol.TransportProtocolDefinition;
 import com.ca.devtest.sv.devtools.protocol.builder.ParamatrizedBuilder;
 import com.ca.devtest.sv.devtools.protocol.builder.TransportProtocolBuilderImpl;
+import com.ca.devtest.sv.devtools.services.ExecutionMode;
+import com.ca.devtest.sv.devtools.services.ExecutionModeType;
 import com.ca.devtest.sv.devtools.services.VirtualService;
 import com.ca.devtest.sv.devtools.type.TransportProtocolType;
 import com.ca.devtest.sv.devtools.utils.VelocityRender;
@@ -30,6 +32,10 @@ public abstract class VirtualServiceBuilder implements ParamatrizedBuilder {
 	private final String DEFAULT_SERVICE_PROPERTIES_TPL = "<?xml version=\"1.0\" ?><recording><name>${virtualService.deployedName}</name><binary>false</binary><group>$virtualService.group</group></recording>";
 	private final Map<String, String> parameters = new HashMap<String, String>();
 	private VirtualServiceType type = VirtualServiceType.RRPAIRS;
+	private int capacity=1;
+    private int thinkScale=100;
+    private boolean autoRestartEnabled=true;
+    private ExecutionModeType executionMode=ExecutionModeType.EFFICIENT;
 
 	public VirtualServiceBuilder(String name, VirtualServiceEnvironment vse) {
 		super();
@@ -75,6 +81,10 @@ public abstract class VirtualServiceBuilder implements ParamatrizedBuilder {
 		VirtualService virtualService = new VirtualService(getServiceName(), getType(), getVse());
 		virtualService.setDeployedName(getDeployedName());
 		virtualService.setPackedVirtualService(packVirtualService());
+		virtualService.getExecutionMode().setCapacity(this.capacity);
+		virtualService.getExecutionMode().setAutoRestartEnabled(this.autoRestartEnabled);
+		virtualService.getExecutionMode().setThinkScale(this.thinkScale);
+		//TODO Handle ExecutionMode
 		return virtualService;
 	}
 
@@ -150,6 +160,62 @@ public abstract class VirtualServiceBuilder implements ParamatrizedBuilder {
 	protected String generateVrsContent() {
 
 		return null != transportProtocol ? transportProtocol.toVrsContent() : "";
+	}
+
+	/**
+	 * @return the capacity
+	 */
+	public final int getCapacity() {
+		return capacity;
+	}
+
+	/**
+	 * @return the thinkScale
+	 */
+	public final int getThinkScale() {
+		return thinkScale;
+	}
+
+	/**
+	 * @return the autoRestartEnabled
+	 */
+	public final boolean isAutoRestartEnabled() {
+		return autoRestartEnabled;
+	}
+
+	/**
+	 * @return the executionMode
+	 */
+	public final ExecutionModeType getExecutionMode() {
+		return executionMode;
+	}
+
+	/**
+	 * @param capacity the capacity to set
+	 */
+	public final void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	/**
+	 * @param thinkScale the thinkScale to set
+	 */
+	public final void setThinkScale(int thinkScale) {
+		this.thinkScale = thinkScale;
+	}
+
+	/**
+	 * @param autoRestartEnabled the autoRestartEnabled to set
+	 */
+	public final void setAutoRestartEnabled(boolean autoRestartEnabled) {
+		this.autoRestartEnabled = autoRestartEnabled;
+	}
+
+	/**
+	 * @param executionMode the executionMode to set
+	 */
+	public final void setExecutionMode(ExecutionModeType executionMode) {
+		this.executionMode = executionMode;
 	}
 
 	/**

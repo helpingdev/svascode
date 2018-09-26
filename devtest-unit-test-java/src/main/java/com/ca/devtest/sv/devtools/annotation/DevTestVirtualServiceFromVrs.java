@@ -9,6 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.ca.devtest.sv.devtools.services.ExecutionModeType;
+
 /**
  * Define virtual service using VRS fragment file. <br/>
  * 
@@ -27,6 +29,10 @@ import java.lang.annotation.Target;
 @Repeatable(DevTestVirtualServicesFromVrs.class)
 public @interface DevTestVirtualServiceFromVrs {
 	String serviceName();
+	int capacity() default 1;
+	int thinkScale() default 100;
+	boolean autoRestartEnabled() default true;
+	ExecutionModeType executionMode() default ExecutionModeType.EFFICIENT;
 	String workingFolder();
 	Config vrsConfig();
 	Parameter[] parameters() default{};

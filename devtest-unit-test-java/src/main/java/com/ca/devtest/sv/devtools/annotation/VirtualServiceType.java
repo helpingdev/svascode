@@ -2,8 +2,8 @@ package com.ca.devtest.sv.devtools.annotation;
 
 public enum VirtualServiceType {
 	// Objets directement construits
-	RRPAIRS("RRPairs", "http://%s:1505/api/Dcm/VSEs/%s/actions/createService"), VSM("MARFile",
-			"http://%s:1505/api/Dcm/VSEs/%s/actions/deployMar");
+	RRPAIRS("RRPairs", "http://%s:%s/api/Dcm/VSEs/%s/actions/createService"), VSM("MARFile",
+			"http://%s:%s/api/Dcm/VSEs/%s/actions/deployMar");
 
 	private String name = "";
 	private String urlPattern = "";

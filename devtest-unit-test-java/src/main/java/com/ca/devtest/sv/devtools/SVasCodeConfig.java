@@ -23,7 +23,13 @@ public interface SVasCodeConfig extends Config {
 	 */
 	@Key("devtest.registry")
 	String registryHost();
-
+	/**
+	 * Registry server port. By default '1505'.
+	 * 
+	 * @return registry server name.
+	 */
+	@Key("devtest.registry.port")
+	String registryPort();
 	/**
 	 * VSE name. By default 'VSE'.
 	 * 

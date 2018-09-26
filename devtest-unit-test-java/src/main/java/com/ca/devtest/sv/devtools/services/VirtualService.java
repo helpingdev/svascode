@@ -5,9 +5,16 @@ package com.ca.devtest.sv.devtools.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.io.IOUtils;
 
 import com.ca.devtest.sv.devtools.VirtualServiceEnvironment;
 import com.ca.devtest.sv.devtools.annotation.VirtualServiceType;
+import com.ca.devtest.sv.devtools.utils.VelocityRender;
 
 /**
  * @author gaspa03
@@ -19,6 +26,7 @@ public final class VirtualService {
 	private final VirtualServiceEnvironment vse;
 	private File packedVirtualService=null;
 	private final VirtualServiceType type;
+	private ExecutionMode executionMode=new ExecutionMode();
 	
 	public VirtualService( String name, VirtualServiceEnvironment vse) {
 		super();
@@ -85,6 +93,7 @@ public final class VirtualService {
 	 */
 	public void deploy() throws IOException {
 		getVse().deployService(this);
+		getVse().changeExecutionMode(this);
 		
 	}
 	/**
@@ -108,6 +117,31 @@ public final class VirtualService {
 		this.deployedName = deployedName;
 	}
 
-	
+	/**
+	 * @return the mode
+	 */
+	public final ExecutionMode getExecutionMode() {
+		return executionMode;
+	}
+
+	/**
+	 * @param mode the mode to set
+	 */
+	public final void setExecutionMode(ExecutionMode mode) {
+		this.executionMode = mode;
+	}
+
+	/**
+	 * @return Payload to change Service Execution mode
+	 * @throws IOException
+	 */
+	public final String buildExcusionModePayload() throws IOException{
+		InputStream inputStreamContent =getClass().getClassLoader().getResourceAsStream("virtualize-put-message.xml");
+		Map<String, VirtualService> config = new HashMap<String,VirtualService>();
+		config.put("virtualService", this);
+		return VelocityRender.render(IOUtils.toString(inputStreamContent, Charset.defaultCharset()), config);
+		
+		
+	}
 
 }

@@ -26,7 +26,7 @@ import com.ca.devtest.sv.devtools.junit.VirtualServicesRule;
  * @author gaspa03
  *
  */
-@DevTestVirtualServer(deployServiceToVse = "vse-gaspa03")
+@DevTestVirtualServer(deployServiceToVse = "vse-perf")
 public class DevTesClientRRPairs {
 	
 

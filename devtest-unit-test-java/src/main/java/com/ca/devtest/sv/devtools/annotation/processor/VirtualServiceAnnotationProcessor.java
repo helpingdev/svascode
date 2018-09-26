@@ -60,7 +60,11 @@ public class VirtualServiceAnnotationProcessor implements AnnotationProcessor {
 			}
 			// handle Parameters
 			Utility.addParamsToBuilder(virtualServiceBuilder, virtualService.parameters());
-
+		virtualServiceBuilder.setCapacity(virtualService.capacity());
+		virtualServiceBuilder.setAutoRestartEnabled(virtualService.autoRestartEnabled());
+		virtualServiceBuilder.setExecutionMode(virtualService.executionMode());
+		virtualServiceBuilder.setThinkScale(virtualService.thinkScale());
+		
 			return virtualServiceBuilder.build();
 		} catch (Exception error) {
 			throw new VirtualServiceProcessorException("Error during building virtual service : ", error);
