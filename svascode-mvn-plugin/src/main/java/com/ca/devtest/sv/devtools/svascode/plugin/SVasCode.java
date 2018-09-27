@@ -3,6 +3,7 @@ package com.ca.devtest.sv.devtools.svascode.plugin;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,15 +28,15 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import com.ca.devtest.sv.devtools.DevTestClient;
+import com.ca.devtest.sv.devtools.VirtualServiceEnvironment;
 import com.ca.devtest.sv.devtools.protocol.builder.ParamatrizedBuilder;
 import com.ca.devtest.sv.devtools.protocol.builder.TransportProtocolFromVrsBuilder;
+import com.ca.devtest.sv.devtools.services.ExecutionModeType;
 import com.ca.devtest.sv.devtools.services.VirtualService;
 import com.ca.devtest.sv.devtools.services.builder.VirtualServiceBuilder;
 import com.ca.devtest.sv.devtools.svascode.helper.VirtualServiceHelper;
-import com.ca.devtest.sv.devtools.svascode.model.CompositeVirtualService;
 import com.ca.devtest.sv.devtools.svascode.model.VirtualServiceModel;
 import com.ca.devtest.sv.devtools.svascode.model.VirtualServicesModel;
-import com.ca.devtest.sv.devtools.utils.api.ServiceAPI;
 
 /**
  * A goal to generate code.
@@ -93,22 +94,39 @@ public class SVasCode extends AbstractMojo {
 
 		getLog().info("Should deploy  " + services.getServices().size() + " services.");
 
-		List<CompositeVirtualService> virtualServices = new ArrayList<CompositeVirtualService>();
+		Map<String, List<VirtualService>> virtualServices = null;
 		try {
-			virtualServices.addAll(buildServices(services));
+			virtualServices=buildServices(services);
+			Set<String> vseNames=virtualServices.keySet();
+			for (String vseName : vseNames) {
+				checkServer(vseName);
+				cleanServer(vseName);
+				deployVirtualServices(virtualServices.get(vseName));
+			}
+			
+			
 		} catch (IOException e) {
 			getLog().error("Erreur during building Virtual Services...", e);
 			throw new MojoExecutionException("Erreur during building Virtual Services...", e);
 		}
 
-		checkServer();
-		deployVirtualServices(virtualServices);
+		
 
 		getLog().info("Start deploying SV on server... ");
 
 	}
 
-	private void checkServer() {
+	/**
+	 * @param vseName
+	 * @throws IOException
+	 */
+	private void cleanServer(String vseName) throws IOException {
+		
+		VirtualServiceEnvironment vse= new VirtualServiceEnvironment(registryHostName, vseName,user,password, null);
+		vse.cleanServer();
+	}
+
+	private void checkServer(String vseName) {
 		// TODO Auto-generated method stub
 
 	}
@@ -116,16 +134,14 @@ public class SVasCode extends AbstractMojo {
 	/**
 	 * @param virtualServices
 	 */
-	private void deployVirtualServices(List<CompositeVirtualService> virtualServices) {
+	private void deployVirtualServices(List<VirtualService> virtualServices) {
 
-		for (CompositeVirtualService virtualService : virtualServices) {
-			getLog().info("deploying service <" + virtualService.getService().getDeployedName() + ">");
+		for (VirtualService virtualService : virtualServices) {
+			getLog().info("deploying service <" + virtualService.getDeployedName() + ">");
 			try {
-				virtualService.getService().deploy();
-				//FIXME Change this code
-				//ServiceAPI.updateServiceStatus(registryHostName, virtualService.getModel().getTargetedVSE().get(0), user, password, virtualService.getModel());
+				virtualService.deploy();
 			} catch (IOException e) {
-				getLog().warn("Error during deployement of service <" + virtualService.getService().getDeployedName() + ">");
+				getLog().warn("Error during deployement of service <" + virtualService.getDeployedName() + ">");
 			}
 		}
 
@@ -136,11 +152,11 @@ public class SVasCode extends AbstractMojo {
 	 * @return
 	 * @throws IOException
 	 */
-	private List<CompositeVirtualService> buildServices(VirtualServicesModel services) throws IOException {
+	private Map<String, List<VirtualService>> buildServices(VirtualServicesModel services) throws IOException {
 
 		List<VirtualServiceModel> models = services.getServices();
-		List<CompositeVirtualService> virtualServices = new ArrayList<CompositeVirtualService>();
-		List<DevTestClient> targetedVSEs = null;
+		Map<String, List<VirtualService>> result = new HashMap<String, List<VirtualService>>();
+		List<VirtualService> virtualServices = null;
 		for (VirtualServiceModel virtualServiceModel : models) {
 			File rrpairsFolder = new File(workspaceDir, virtualServiceModel.getWorkingFolder());
 			File vrsFile = new File(workspaceDir, virtualServiceModel.getDefinition());
@@ -152,21 +168,36 @@ public class SVasCode extends AbstractMojo {
 			// Optional:fill out parameter in your VRS file
 			propagateConfig(transportBuilder, virtualServiceModel.getConfiguration());
 			for (String vseName : tagetedVSE) {
+				// group VS by TargetedVSE
+				if (!result.containsKey(vseName)) {
+					virtualServices = new ArrayList<VirtualService>();
+					result.put(vseName, virtualServices);
+				} else {
+					virtualServices = result.get(vseName);
+				}
 				DevTestClient devtest = new DevTestClient(registryHostName, vseName, user, password,
 						virtualServiceModel.getGroup());
+				
+
 				VirtualServiceBuilder vsbuilder = devtest.fromRRPairs(virtualServiceModel.getName(), rrpairsFolder);
 				vsbuilder.over(transportBuilder.build());
 
 				// Optional : fill out parameters in you rrpairs file
 				propagateConfig(vsbuilder, virtualServiceModel.getConfiguration());
 				// Virtual Service
+				// add Transport Protocol
+				vsbuilder.over(transportBuilder.build());
+				vsbuilder.setCapacity(virtualServiceModel.getCapacity());
+				vsbuilder.setAutoRestartEnabled(virtualServiceModel.isAutoRestart());
+				vsbuilder.setExecutionMode(ExecutionModeType.valueIgnoreCaseOf(virtualServiceModel.getExecutionMode()));
+				vsbuilder.setThinkScale(virtualServiceModel.getThinkScale());
 				VirtualService sv = vsbuilder.build();
-				virtualServices.add(new CompositeVirtualService(virtualServiceModel,sv));
+				virtualServices.add(sv);
 
 			}
 
 		}
-		return virtualServices;
+		return result;
 	}
 
 	/**

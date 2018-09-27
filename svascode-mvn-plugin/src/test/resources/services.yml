@@ -5,6 +5,9 @@ services:
     - name: cars
       group: cars
       definition: "./cars/cars.vrs"
+      capacity: 2
+      thinkScale: 100
+      executionMode: "EFFICIENT"
       workingFolder: ./cars
       configuration:
         listenport: '7001'
