@@ -200,7 +200,7 @@ public class VirtualServiceEnvironment {
 				String.format(GET_SERVICES_URI, getRegistryHostName(), SvAsCodeConfigUtil.registryPort()));
 		get.setHeader("Authorization", String.format("Basic %s",
 				new String(Base64.encodeBase64(new String(userName + ":" + password).getBytes()))));
-		get.addHeader("Content-Type", "application/vnd.ca.lisaInvoke.vseList+json");
+		get.addHeader("Accept", "application/vnd.ca.lisaInvoke.vseList+json");
 		HttpResponse response = httpClient.execute(get);
 
 		if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
@@ -224,11 +224,13 @@ public class VirtualServiceEnvironment {
 	 * @throws IOException
 	 */
 	public void cleanServer() throws IOException {
+		
 		List<VirtualService> virtualServices = listVirtualServices();
+		LOG.info("Cleaning VSE <"+getName()+">..."+virtualServices.size()+" services found...");
 		for (VirtualService virtualService : virtualServices) {
 			virtualService.unDeploy();
 		}
-	
+		LOG.info("VSE <"+getName()+"> cleaned up!");
 	}
 
 	/**

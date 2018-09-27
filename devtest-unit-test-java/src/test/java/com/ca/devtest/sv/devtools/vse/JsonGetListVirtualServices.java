@@ -14,6 +14,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ca.devtest.sv.devtools.VirtualServiceEnvironment;
+import com.ca.devtest.sv.devtools.services.VirtualService;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
 
@@ -31,6 +33,13 @@ public class JsonGetListVirtualServices {
 		List<String> services = ctx.read(expression);
 		LOG.info(services.toString());
 		assertEquals(2, services.size());
+	}
+	
+	@Test
+	public void listVirtualServiceFromVSE() throws URISyntaxException, IOException {
+		VirtualServiceEnvironment vse=new VirtualServiceEnvironment("localhost","vse-perf","admin","admin","");
+		List<VirtualService> services=vse.listVirtualServices();		
+		assertEquals(1, services.size());
 	}
 
 }
