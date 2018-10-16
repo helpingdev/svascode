@@ -29,12 +29,22 @@
 			<plugin>
 				<groupId>com.ca.devtest.sv.devtools</groupId>
 				<artifactId>svascode-maven-plugin</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.1.4-SNAPSHOT</version>
 				<configuration>
 					<registryHostName>localhost</registryHostName>
 					<workspace>${workspace}</workspace>
 					<servicesDefinitionFile>${services.definition}</servicesDefinitionFile>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>deploySV</goal>
+						</goals>				
+						<configuration>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

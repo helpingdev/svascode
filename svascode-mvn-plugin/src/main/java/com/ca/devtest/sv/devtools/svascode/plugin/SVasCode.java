@@ -40,9 +40,9 @@ import com.ca.devtest.sv.devtools.svascode.model.VirtualServicesModel;
 
 /**
  * A goal to generate code.
- * 
+ *
  * @goal deploySV
- * @phase generate-sources
+ * @phase process-resources
  */
 
 public class SVasCode extends AbstractMojo {

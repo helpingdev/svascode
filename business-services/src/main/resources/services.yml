@@ -4,9 +4,13 @@ definition: "./vrs_template.xml"
 services:
     - name: cars
       group: cars
-      definition: "./vrs_template.xml"
-      workingFolder: ./search_client
+      capacity: 10
+      thinkScale: 200
+      executionMode: "EFFICIENT"
+      definition: "./cars/cars.vrs"
+      workingFolder: ./cars
       configuration:
-        listenport: '7001'
+        listenport: '7901'
       targetedVSE: 
-      - VSE
+      - vse-perf
+      - vse
